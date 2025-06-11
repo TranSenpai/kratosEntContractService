@@ -1,0 +1,473 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ContractService API
+    version: 0.0.1
+paths:
+    /api/v1/contracts:
+        get:
+            tags:
+                - ContractService
+            operationId: ContractService_GetContract
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: string
+                - name: timezone
+                  in: query
+                  schema:
+                    type: integer
+                    format: sint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.GetContractReply'
+        post:
+            tags:
+                - ContractService
+            operationId: ContractService_CreateContract
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.v1.contract.CreateContractRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.CreateContractReply'
+        delete:
+            tags:
+                - ContractService
+            operationId: ContractService_DeleteContract
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.DeleteContractReply'
+    /api/v1/contracts/list:
+        get:
+            tags:
+                - ContractService
+            operationId: ContractService_ListContract
+            parameters:
+                - name: id.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: id.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: studentCode.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: studentCode.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: firstName.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: firstName.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: lastName.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: lastName.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: middleName.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: middleName.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: email.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: email.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: phone.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: phone.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: gender.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: uint32
+                - name: gender.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: uint32
+                - name: address.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: address.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: roomId.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: roomId.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: isActive
+                  in: query
+                  schema:
+                    type: boolean
+                - name: sign.includes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: sign.excludes
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: registryAt.fromTime
+                  in: query
+                  schema:
+                    type: string
+                    format: date-time
+                - name: registryAt.toTime
+                  in: query
+                  schema:
+                    type: string
+                    format: date-time
+                - name: total
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: timezone
+                  in: query
+                  schema:
+                    type: integer
+                    format: sint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.ListContractReply'
+    /api/v1/contracts/rooms/least:
+        get:
+            tags:
+                - ContractService
+            operationId: ContractService_ListTotalContractEachRoom
+            parameters:
+                - name: number
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.ListTotalContractEachRoomReply'
+    /api/v1/contracts/{id}:
+        put:
+            tags:
+                - ContractService
+            operationId: ContractService_UpdateContract
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.v1.contract.UpdateContractRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.UpdateContractReply'
+    /api/v1/contracts/{id}/sign:
+        patch:
+            tags:
+                - ContractService
+            operationId: ContractService_SignContract
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.v1.contract.SignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.v1.contract.SignReply'
+components:
+    schemas:
+        api.v1.contract.Contract:
+            type: object
+            properties:
+                id:
+                    type: string
+                studentCode:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                middleName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                gender:
+                    type: integer
+                    format: uint32
+                dob:
+                    type: string
+                    format: date-time
+                address:
+                    type: string
+                avatar:
+                    type: string
+                roomId:
+                    type: string
+                isActive:
+                    type: boolean
+                sign:
+                    type: string
+                registryAt:
+                    type: string
+                    format: date-time
+                notificationChannels:
+                    type: integer
+                    format: uint32
+        api.v1.contract.CreateContractReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.v1.contract.CreateContractRequest:
+            type: object
+            properties:
+                studentCode:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                middleName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                gender:
+                    type: integer
+                    format: uint32
+                dob:
+                    type: string
+                    format: date-time
+                address:
+                    type: string
+                avatar:
+                    type: string
+                roomId:
+                    type: string
+                isActive:
+                    type: boolean
+                sign:
+                    type: string
+                notificationChannels:
+                    type: integer
+                    format: uint32
+        api.v1.contract.DeleteContractReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.v1.contract.GetContractReply:
+            type: object
+            properties:
+                contract:
+                    $ref: '#/components/schemas/api.v1.contract.Contract'
+                message:
+                    type: string
+        api.v1.contract.ListContractReply:
+            type: object
+            properties:
+                contract:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.v1.contract.Contract'
+                message:
+                    type: string
+        api.v1.contract.ListTotalContractEachRoomReply:
+            type: object
+            properties:
+                contractEachRoom:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.v1.contract.ListTotalContractEachRoomReply_ContractEachRoom'
+                message:
+                    type: string
+        api.v1.contract.ListTotalContractEachRoomReply_ContractEachRoom:
+            type: object
+            properties:
+                roomId:
+                    type: string
+                total:
+                    type: integer
+                    format: uint32
+        api.v1.contract.SignReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.v1.contract.SignRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                sign:
+                    type: string
+        api.v1.contract.UpdateContractReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.v1.contract.UpdateContractRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                studentCode:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                middleName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                gender:
+                    type: integer
+                    format: uint32
+                dob:
+                    type: string
+                    format: date-time
+                address:
+                    type: string
+                avatar:
+                    type: string
+                roomId:
+                    type: string
+                isActive:
+                    type: boolean
+                sign:
+                    type: string
+                notificationChannels:
+                    type: integer
+                    format: uint32
+tags:
+    - name: ContractService

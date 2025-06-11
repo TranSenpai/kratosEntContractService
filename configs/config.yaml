@@ -1,0 +1,22 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    username: root
+    password: vlMlgi@8cH*p6o#A4uB8
+    host: 127.0.0.1
+    port: "3306"
+    dbname: chuong
+    # The application (server) is local time
+    params: "?charset=utf8mb4&parseTime=True&loc=UTC"
+    # Asia%2FHo_Chi_Minh, UTC, Local, Singapore
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
