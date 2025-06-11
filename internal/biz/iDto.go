@@ -4,7 +4,6 @@ import (
 	entity "dormitory/internal/entities"
 	models "dormitory/internal/models"
 	"encoding/base64"
-	"errors"
 	"net/http"
 )
 
@@ -27,7 +26,7 @@ func (d *DtoAdapter) GetDtoAdapter(kind string) IDto {
 }
 
 func NewDtoApdater() *DtoAdapter {
-	return &DtoAdapter{}
+	return &DtoAdapter{map[string]IDto{}}
 }
 
 func DecodeBase64(input string) (*[]byte, error) {
@@ -72,9 +71,6 @@ type createDto struct {
 }
 
 func (createDto *createDto) convertStudentInfo() error {
-	if createDto.entity == nil {
-		return GetError(http.StatusUnprocessableEntity, errors.New("nil entity"))
-	}
 	createDto.entity.StudentCode = createDto.contract.StudentCode
 	createDto.entity.FirstName = createDto.contract.FirstName
 	createDto.entity.LastName = createDto.contract.LastName
@@ -111,27 +107,11 @@ func (createDto *createDto) Convert() error {
 }
 
 func (createDto *createDto) Getter() any {
-	return createDto
+	return createDto.entity
 }
 
 func NewCreateDto(contract *models.CreateContract) *createDto {
-	return &createDto{contract: contract}
-}
-
-func (c contractBiz) convertCreateDto(contract *models.CreateContract) (*entity.Contract, error) {
-	dtoAdapter := NewDtoApdater()
-	dtoAdapter.SetDtoAdapter("createDto", NewCreateDto(contract))
-	createDto := dtoAdapter.GetDtoAdapter("createDto")
-	err := createDto.Convert()
-	if err != nil {
-		return nil, err
-	}
-	data := createDto.Getter()
-	entity, ok := data.(entity.Contract)
-	if !ok {
-		return nil, GetError(http.StatusInternalServerError, errors.New("faile to assertion create DTO"))
-	}
-	return &entity, nil
+	return &createDto{contract: contract, entity: &entity.Contract{}}
 }
 
 // Concrete Update DTO
@@ -184,27 +164,11 @@ func (updateDto *updateDto) Convert() error {
 }
 
 func (updateDto *updateDto) Getter() any {
-	return updateDto
+	return updateDto.updateList
 }
 
 func NewUpdateDto(contract *models.UpdateContract) *updateDto {
-	return &updateDto{contract: contract}
-}
-
-func (c contractBiz) convertUpdateDto(contract *models.UpdateContract) (map[string]any, error) {
-	dtoAdapter := NewDtoApdater()
-	dtoAdapter.SetDtoAdapter("updateDto", NewUpdateDto(contract))
-	createDto := dtoAdapter.GetDtoAdapter("updateDto")
-	err := createDto.Convert()
-	if err != nil {
-		return nil, err
-	}
-	data := createDto.Getter()
-	mapField, ok := data.(map[string]any)
-	if !ok {
-		return nil, GetError(http.StatusInternalServerError, errors.New("faile to assertion update DTO"))
-	}
-	return mapField, nil
+	return &updateDto{contract: contract, updateList: map[string]any{}}
 }
 
 // Concrete Get and List DTO
@@ -245,26 +209,9 @@ func (getListDto *getListDto) Convert() error {
 }
 
 func NewGetListDto(entity *entity.Contract) *getListDto {
-	return &getListDto{entity: entity}
+	return &getListDto{entity: entity, contract: &models.ReplyContract{}}
 }
 
 func (getListDto *getListDto) Getter() any {
-	return getListDto
-}
-
-func (c contractBiz) convertGetListDto(entity *entity.Contract) (*models.ReplyContract, error) {
-	dtoAdapter := NewDtoApdater()
-	dtoAdapter.SetDtoAdapter("getListDto", NewGetListDto(entity))
-	getListDto := dtoAdapter.GetDtoAdapter("getListDto")
-	err := getListDto.Convert()
-	if err != nil {
-		return nil, err
-	}
-	data := getListDto.Getter()
-	contract, ok := data.(models.ReplyContract)
-	if !ok {
-		return nil, GetError(http.StatusInternalServerError, errors.New("faile to assertion get list DTO"))
-	}
-
-	return &contract, nil
+	return getListDto.contract
 }

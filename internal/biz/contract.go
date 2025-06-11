@@ -12,8 +12,7 @@ func (c *contractBiz) CreateContract(ctx context.Context, contract *models.Creat
 	if contract == nil {
 		return GetError(http.StatusUnprocessableEntity, errors.New("contract empty"))
 	}
-	checker := c.GetCheckRequiredField()
-	if err := checker.CheckRequiredField(ctx, contract); err != nil {
+	if err := c.CheckRequiredField(ctx, contract); err != nil {
 		return err
 	}
 	entity, err := c.convertCreateDto(contract)

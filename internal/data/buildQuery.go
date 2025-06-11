@@ -93,7 +93,7 @@ func (q *query) buildExcludeQuery(filter *models.ContractFilter) *query {
 func (q *query) buildQuery(filter *models.ContractFilter) *gorm.DB {
 	q.buildIncludeQuery(filter).buildExcludeQuery(filter)
 	if filter.IsActive != nil {
-		q.tx.Where("is_active = ?", *filter.IsActive)
+		q.tx = q.tx.Where("is_active = ?", *filter.IsActive)
 	}
 	if filter.RegistryAt.FromTime != nil && !filter.RegistryAt.FromTime.IsZero() {
 		q.tx = q.tx.Where("registry_at >= ?", *filter.RegistryAt.FromTime)
