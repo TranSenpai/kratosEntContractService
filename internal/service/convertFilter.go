@@ -4,8 +4,10 @@ import (
 	contractApi "dormitory/api/contract"
 	models "dormitory/internal/models"
 	"net/http"
+	"time"
 
 	kerror "github.com/go-kratos/kratos/v2/errors"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func CheckRequest[T any](slice []T) []T {
@@ -46,6 +48,15 @@ func (s ContractService) ConvertStudentInfo(filter *models.ContractFilter, req *
 	return nil
 }
 
+func (s ContractService) partRequestRegistry(time *timestamppb.Timestamp) *time.Time {
+	if time != nil {
+		fromTime := time.AsTime()
+		return &fromTime
+	}
+
+	return nil
+}
+
 func (s ContractService) ConvertContractInfo(filter *models.ContractFilter, req *contractApi.ListContractRequest) error {
 	if filter == nil {
 		return kerror.New(http.StatusUnprocessableEntity, "Service error|", "nil filter")
@@ -68,15 +79,10 @@ func (s ContractService) ConvertContractInfo(filter *models.ContractFilter, req 
 	}
 	filter.IsActive = req.IsActive
 	if req.RegistryAt != nil {
-		if req.RegistryAt.FromTime != nil {
-			fromTime := req.RegistryAt.FromTime.AsTime()
-			filter.RegistryAt.FromTime = &fromTime
-		}
-		if req.RegistryAt.ToTime != nil {
-			toTime := req.RegistryAt.ToTime.AsTime()
-			filter.RegistryAt.ToTime = &toTime
-		}
+		filter.RegistryAt.FromTime = s.partRequestRegistry(req.RegistryAt.FromTime)
+		filter.RegistryAt.ToTime = s.partRequestRegistry(req.RegistryAt.ToTime)
 	}
+
 	return nil
 }
 

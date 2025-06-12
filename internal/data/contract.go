@@ -78,8 +78,6 @@ func (cr contractRepo) GetContract(ctx context.Context, contractID uint64) (*ent
 func (cr contractRepo) ListContract(ctx context.Context, filter *models.ContractFilter) ([]entity.Contract, error) {
 	var lst []entity.Contract
 	cr.db = cr.buildQuery(filter, cr.db)
-
-	// err := cr.db.Debug().Model(&entity.Contract{}).Find(&lst).Error
 	partitionStr := CallPartition2025(filter)
 	fmt.Println(partitionStr)
 	err := cr.db.Debug().Table(partitionStr).Find(&lst).Error
