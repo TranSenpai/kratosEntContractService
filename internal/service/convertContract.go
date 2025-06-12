@@ -18,7 +18,10 @@ func (s ContractService) ConvertCreateContractRequest(req *contractApi.CreateCon
 	contract.Sign = req.Sign
 	contract.Phone = req.Phone
 	contract.Gender = req.Gender
-	contract.Dob = req.Dob.AsTime()
+	if contract.Dob != nil {
+		dob := req.Dob.AsTime()
+		contract.Dob = &dob
+	}
 	contract.Address = req.Address
 	contract.Avatar = req.Avatar
 	contract.IsActive = req.IsActive

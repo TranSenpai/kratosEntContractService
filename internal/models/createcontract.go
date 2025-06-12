@@ -10,7 +10,7 @@ type CreateContract struct {
 	Email                string
 	Phone                string
 	Gender               uint32
-	Dob                  time.Time
+	Dob                  *time.Time
 	Address              string
 	Avatar               string
 	RoomId               string

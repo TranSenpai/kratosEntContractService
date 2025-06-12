@@ -36,6 +36,7 @@ func (cr *contractRepo) CreateContract(ctx context.Context, createContract *enti
 		if err != nil {
 			return GetError(err)
 		}
+
 		return nil
 	})
 }
@@ -45,6 +46,9 @@ func (cr *contractRepo) UpdateContract(ctx context.Context, updateContract map[s
 		// Updates supports updating with struct or map[string]interface{},
 		// when updating with struct it will only update non-zero fields by default
 		queryTx := cr.buildQuery(filter, tx)
+		if queryTx == nil {
+			return GetError(errors.New("nil transaction"))
+		}
 		result := queryTx.Debug().Model(&entity.Contract{}).Omit("id").Updates(updateContract).WithContext(ctx)
 		if result.Error != nil {
 			return GetError(result.Error)
@@ -78,10 +82,12 @@ func (cr contractRepo) GetContract(ctx context.Context, contractID uint64) (*ent
 func (cr contractRepo) ListContract(ctx context.Context, filter *models.ContractFilter) ([]entity.Contract, error) {
 	var lst []entity.Contract
 	cr.db = cr.buildQuery(filter, cr.db)
+	if cr.db == nil {
+		return nil, GetError(errors.New("nil transaction"))
+	}
 	partitionStr := CallPartition2025(filter)
 	fmt.Println(partitionStr)
 	err := cr.db.Debug().Table(partitionStr).Find(&lst).Error
-
 	if err != nil {
 		GetError(err)
 	}

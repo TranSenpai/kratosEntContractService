@@ -15,7 +15,7 @@ func (c *contractBiz) CreateContract(ctx context.Context, contract *models.Creat
 	if err := c.CheckRequiredField(ctx, contract); err != nil {
 		return err
 	}
-	entity, err := c.convertCreateDto(contract)
+	entity, err := c.convertCreateContractRequest(contract)
 	if err != nil {
 		return err
 	}
@@ -27,7 +27,7 @@ func (c *contractBiz) UpdateContract(ctx context.Context, contract *models.Updat
 	if contract == nil {
 		return GetError(http.StatusUnprocessableEntity, errors.New("nil contract"))
 	}
-	mapField, err := c.convertUpdateDto(contract)
+	mapField, err := c.convertUpdateContractRequest(contract)
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func (c *contractBiz) GetContract(ctx context.Context, contractID uint64) (*mode
 	if contractEntity.ID == 0 {
 		return nil, GetError(http.StatusNotFound, errors.New("contract not found"))
 	}
-	contract, err := c.convertGetListDto(contractEntity)
+	contract, err := c.convertReplyContract(contractEntity)
 	if err != nil {
 		return nil, err
 	}
@@ -70,11 +70,11 @@ func (c *contractBiz) ListContract(ctx context.Context, filter *models.ContractF
 	}
 	var contracts []models.ReplyContract
 	for _, v := range entities {
-		data, err := c.convertGetListDto(&v)
-		if err != nil || data == nil {
+		contract, err := c.convertReplyContract(&v)
+		if err != nil || contract == nil {
 			return nil, err
 		}
-		contracts = append(contracts, *data)
+		contracts = append(contracts, *contract)
 	}
 
 	return contracts, nil
