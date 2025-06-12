@@ -44,8 +44,7 @@ func (cr *contractRepo) UpdateContract(ctx context.Context, updateContract map[s
 	return cr.db.Transaction(func(tx *gorm.DB) error {
 		// Updates supports updating with struct or map[string]interface{},
 		// when updating with struct it will only update non-zero fields by default
-		q := NewQueryBuilder(tx)
-		queryTx := q.buildQuery(filter)
+		queryTx := cr.buildQuery(filter, tx)
 		result := queryTx.Debug().Model(&entity.Contract{}).Omit("id").Updates(updateContract).WithContext(ctx)
 		if result.Error != nil {
 			return GetError(result.Error)
@@ -78,8 +77,7 @@ func (cr contractRepo) GetContract(ctx context.Context, contractID uint64) (*ent
 
 func (cr contractRepo) ListContract(ctx context.Context, filter *models.ContractFilter) ([]entity.Contract, error) {
 	var lst []entity.Contract
-	q := NewQueryBuilder(cr.db)
-	cr.db = q.buildQuery(filter)
+	cr.db = cr.buildQuery(filter, cr.db)
 
 	// err := cr.db.Debug().Model(&entity.Contract{}).Find(&lst).Error
 	partitionStr := CallPartition2025(filter)

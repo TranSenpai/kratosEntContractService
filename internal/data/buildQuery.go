@@ -6,107 +6,108 @@ import (
 	"gorm.io/gorm"
 )
 
-type query struct {
-	tx *gorm.DB
-}
-
-func buildQueryIncludeExclude[T any](slice []T, q *query, field string) *query {
+func getQueryInclude[T any](slice []T, tx *gorm.DB, field string) *gorm.DB {
 	if len(slice) == 0 {
-		return q
+		return tx
 	}
-	q.tx = q.tx.Where(field+" IN ?", slice)
 
-	return q
+	return tx.Where(field+" IN ?", slice)
 }
 
-func (q *query) studentInfoInclude(filter *models.ContractFilter) *query {
+func getQueryExclude[T any](slice []T, tx *gorm.DB, field string) *gorm.DB {
+	if len(slice) == 0 {
+		return tx
+	}
+
+	return tx.Where(field+" NOT IN ?", slice)
+}
+
+func (cr contractRepo) studentInfoInclude(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
-	q = buildQueryIncludeExclude(filter.Id.Includes, q, "id")
-	q = buildQueryIncludeExclude(filter.StudentCode.Includes, q, "student_code")
-	q = buildQueryIncludeExclude(filter.Email.Includes, q, "email")
-	q = buildQueryIncludeExclude(filter.FirstName.Includes, q, "first_name")
-	q = buildQueryIncludeExclude(filter.LastName.Includes, q, "last_name")
-	q = buildQueryIncludeExclude(filter.MiddleName.Includes, q, "middle_name")
+	tx = getQueryInclude(filter.Id.Includes, tx, "id")
+	tx = getQueryInclude(filter.StudentCode.Includes, tx, "student_code")
+	tx = getQueryInclude(filter.Email.Includes, tx, "email")
+	tx = getQueryInclude(filter.FirstName.Includes, tx, "first_name")
+	tx = getQueryInclude(filter.LastName.Includes, tx, "last_name")
+	tx = getQueryInclude(filter.MiddleName.Includes, tx, "middle_name")
 
-	return q
-
+	return tx
 }
 
-func (q *query) contractInfoInclude(filter *models.ContractFilter) *query {
+func (cr contractRepo) contractInfoInclude(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
-	q = buildQueryIncludeExclude(filter.Phone.Includes, q, "phone")
-	q = buildQueryIncludeExclude(filter.Sign.Includes, q, "sign")
-	q = buildQueryIncludeExclude(filter.RoomId.Includes, q, "room_id")
-	q = buildQueryIncludeExclude(filter.Gender.Includes, q, "gender")
-	q = buildQueryIncludeExclude(filter.Address.Includes, q, "address")
+	tx = getQueryInclude(filter.Phone.Includes, tx, "phone")
+	tx = getQueryInclude(filter.Sign.Includes, tx, "sign")
+	tx = getQueryInclude(filter.RoomId.Includes, tx, "room_id")
+	tx = getQueryInclude(filter.Gender.Includes, tx, "gender")
+	tx = getQueryInclude(filter.Address.Includes, tx, "address")
 
-	return q
+	return tx
 }
 
-func (q *query) studentInfoExclude(filter *models.ContractFilter) *query {
+func (cr contractRepo) studentInfoExclude(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
-	q = buildQueryIncludeExclude(filter.Id.Excludes, q, "id")
-	q = buildQueryIncludeExclude(filter.StudentCode.Excludes, q, "student_code")
-	q = buildQueryIncludeExclude(filter.Email.Excludes, q, "email")
-	q = buildQueryIncludeExclude(filter.FirstName.Excludes, q, "first_name")
-	q = buildQueryIncludeExclude(filter.LastName.Excludes, q, "last_name")
-	q = buildQueryIncludeExclude(filter.MiddleName.Excludes, q, "middle_name")
+	tx = getQueryExclude(filter.Id.Excludes, tx, "id")
+	tx = getQueryExclude(filter.StudentCode.Excludes, tx, "student_code")
+	tx = getQueryExclude(filter.Email.Excludes, tx, "email")
+	tx = getQueryExclude(filter.FirstName.Excludes, tx, "first_name")
+	tx = getQueryExclude(filter.LastName.Excludes, tx, "last_name")
+	tx = getQueryExclude(filter.MiddleName.Excludes, tx, "middle_name")
 
-	return q
+	return tx
 }
 
-func (q *query) contractInfoExclude(filter *models.ContractFilter) *query {
+func (cr contractRepo) contractInfoExclude(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
-	q = buildQueryIncludeExclude(filter.Phone.Excludes, q, "phone")
-	q = buildQueryIncludeExclude(filter.Sign.Excludes, q, "sign")
-	q = buildQueryIncludeExclude(filter.RoomId.Excludes, q, "room_id")
-	q = buildQueryIncludeExclude(filter.Gender.Excludes, q, "gender")
-	q = buildQueryIncludeExclude(filter.Address.Excludes, q, "address")
+	tx = getQueryExclude(filter.Phone.Excludes, tx, "phone")
+	tx = getQueryExclude(filter.Sign.Excludes, tx, "sign")
+	tx = getQueryExclude(filter.RoomId.Excludes, tx, "room_id")
+	tx = getQueryExclude(filter.Gender.Excludes, tx, "gender")
+	tx = getQueryExclude(filter.Address.Excludes, tx, "address")
 
-	return q
+	return tx
 }
 
-func (q *query) buildIncludeQuery(filter *models.ContractFilter) *query {
+func (cr contractRepo) buildIncludeQuery(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
+	tx = cr.studentInfoInclude(filter, tx)
+	tx = cr.contractInfoInclude(filter, tx)
 
-	return q.studentInfoInclude(filter).contractInfoInclude(filter)
+	return tx
 }
 
-func (q *query) buildExcludeQuery(filter *models.ContractFilter) *query {
+func (cr contractRepo) buildExcludeQuery(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
 		return nil
 	}
+	tx = cr.studentInfoExclude(filter, tx)
+	tx = cr.contractInfoExclude(filter, tx)
 
-	return q.studentInfoExclude(filter).contractInfoExclude(filter)
+	return tx
 }
 
-func (q *query) buildQuery(filter *models.ContractFilter) *gorm.DB {
-	q.buildIncludeQuery(filter).buildExcludeQuery(filter)
+func (cr contractRepo) buildQuery(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
+	tx = cr.buildIncludeQuery(filter, tx)
+	tx = cr.buildExcludeQuery(filter, tx)
 	if filter.IsActive != nil {
-		q.tx = q.tx.Where("is_active = ?", *filter.IsActive)
+		tx = tx.Where("is_active = ?", *filter.IsActive)
 	}
 	if filter.RegistryAt.FromTime != nil && !filter.RegistryAt.FromTime.IsZero() {
-		q.tx = q.tx.Where("registry_at >= ?", *filter.RegistryAt.FromTime)
+		tx = tx.Where("registry_at >= ?", *filter.RegistryAt.FromTime)
 	}
 	if filter.RegistryAt.ToTime != nil && !filter.RegistryAt.ToTime.IsZero() {
-		q.tx = q.tx.Where("registry_at <= ?", *filter.RegistryAt.ToTime)
+		tx = tx.Where("registry_at <= ?", *filter.RegistryAt.ToTime)
 	}
 
-	return q.tx
-}
-
-func NewQueryBuilder(tx *gorm.DB) *query {
-	return &query{
-		tx: tx,
-	}
+	return tx
 }

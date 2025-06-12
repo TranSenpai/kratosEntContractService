@@ -20,7 +20,6 @@ func (d *Data) DB() *gorm.DB {
 
 func NewData(database *gorm.DB, logger log.Logger) (*Data, func(), error) {
 	logHelper := log.NewHelper(log.With(logger, "module", "contract-service/data"))
-
 	// Clean-up function
 	cleanup := func() {
 		sqlDB, err := database.DB()
@@ -30,7 +29,6 @@ func NewData(database *gorm.DB, logger log.Logger) (*Data, func(), error) {
 			logHelper.Error(err)
 		}
 	}
-
 	data := &Data{
 		db:  database,
 		log: logHelper,
