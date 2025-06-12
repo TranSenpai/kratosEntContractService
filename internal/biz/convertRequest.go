@@ -19,7 +19,7 @@ func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract 
 	entity.Email = contract.Email
 	entity.Gender = uint8(contract.Gender)
 	if contract.Dob != nil {
-		entity.DOB = *contract.Dob
+		entity.DOB = contract.Dob
 	}
 	avatarByte, err := decodeAvatar(&contract.Avatar)
 	if err != nil {
@@ -143,7 +143,7 @@ func (c contractBiz) convertReplyContractInfo(replyContract *models.ReplyContrac
 	}
 	replyContract.Sign = &contract.Sign
 	replyContract.Phone = &contract.Phone
-	replyContract.Dob = &contract.DOB
+	replyContract.Dob = contract.DOB
 	replyContract.Address = &contract.Address
 	replyContract.IsActive = &contract.IsActive
 	replyContract.RegistryAt = &contract.RegistryAt
