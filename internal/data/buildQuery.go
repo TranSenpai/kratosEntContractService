@@ -32,6 +32,13 @@ func (cr contractRepo) buildQuery(filter *models.ContractFilter, tx *gorm.DB) *g
 	tx = getQuery(filter.RoomId, tx, "room_id")
 	tx = getQuery(filter.Gender, tx, "gender")
 	tx = getQuery(filter.Address, tx, "address")
+
+	if filter.RegistryAt.FromTime != nil && !filter.RegistryAt.FromTime.IsZero() {
+		tx = tx.Where("registry_at >= ?", filter.RegistryAt.FromTime)
+	}
+	if filter.RegistryAt.FromTime != nil && !filter.RegistryAt.FromTime.IsZero() {
+		tx = tx.Where("registry_at <= ?", filter.RegistryAt.ToTime)
+	}
 	// tx = nil
 	return tx
 }
