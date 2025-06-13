@@ -28,7 +28,7 @@ func createPartitionContract(dbConnection *gorm.DB) {
 	ALTER TABLE contracts DROP PRIMARY KEY, ADD PRIMARY KEY (id, registry_partition)`)
 
 	dbConnection.Debug().Model(&entity.Contract{}).
-		Exec(`ALTER TABLE contracts PARTITION BY RANGE COLUMNS(registry_partition)(
+		Exec(`ALTER TABLE contracts PARTITION BY RANGE (registry_partition)(
 			PARTITION p01 VALUES LESS THAN (202502),
 			PARTITION p02 VALUES LESS THAN (202503),
 			PARTITION p03 VALUES LESS THAN (202504),

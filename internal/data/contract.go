@@ -6,7 +6,6 @@ import (
 	entity "dormitory/internal/entities"
 	models "dormitory/internal/models"
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -85,9 +84,7 @@ func (cr contractRepo) ListContract(ctx context.Context, filter *models.Contract
 	if cr.db == nil {
 		return nil, GetError(errors.New("nil transaction"))
 	}
-	partitionStr := CallPartition2025(filter)
-	fmt.Println(partitionStr)
-	err := cr.db.Debug().Table(partitionStr).Find(&lst).Error
+	err := cr.db.Debug().Model(&entity.Contract{}).Find(&lst).Error
 	if err != nil {
 		GetError(err)
 	}

@@ -18,9 +18,7 @@ func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract 
 	entity.MiddleName = contract.MiddleName
 	entity.Email = contract.Email
 	entity.Gender = uint8(contract.Gender)
-	if contract.Dob != nil {
-		entity.DOB = contract.Dob
-	}
+	entity.DOB = contract.Dob
 	avatarByte, err := decodeAvatar(&contract.Avatar)
 	if err != nil {
 		return GetError(http.StatusUnprocessableEntity, err)
@@ -45,10 +43,10 @@ func (c contractBiz) convertCreateContractInfo(entity *entity.Contract, contract
 }
 
 func (c contractBiz) convertCreateContractRequest(contract *models.CreateContract) (*entity.Contract, error) {
-	entity := &entity.Contract{}
 	if contract == nil {
 		return nil, GetError(http.StatusUnprocessableEntity, errors.New("create contract or entity nil"))
 	}
+	entity := &entity.Contract{}
 	err := c.convertCreateStudentInfo(entity, contract)
 	if err != nil {
 		return nil, err
@@ -167,13 +165,13 @@ func (c contractBiz) convertReplyContract(contract *entity.Contract) (*models.Re
 	return replyContract, nil
 }
 
-func DecodeBase64(input string) (*[]byte, error) {
+func DecodeBase64(input string) ([]byte, error) {
 	decoded, err := base64.StdEncoding.DecodeString(input)
 	if err != nil {
 		return nil, GetError(http.StatusInternalServerError, err)
 	}
 
-	return &decoded, nil
+	return decoded, nil
 }
 
 func EncodeBase64(input []byte) string {
@@ -186,7 +184,7 @@ func decodeAvatar(avatar *string) ([]byte, error) {
 		if err != nil {
 			return nil, GetError(http.StatusUnprocessableEntity, err)
 		}
-		return *avatarDecoded, nil
+		return avatarDecoded, nil
 	}
 
 	return nil, nil

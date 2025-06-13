@@ -19,7 +19,7 @@ func getQuery[T any](data models.SearchFilter[T], tx *gorm.DB, field string) *go
 
 func (cr contractRepo) buildQuery(filter *models.ContractFilter, tx *gorm.DB) *gorm.DB {
 	if filter == nil {
-		return nil
+		return tx
 	}
 	tx = getQuery(filter.Id, tx, "id")
 	tx = getQuery(filter.StudentCode, tx, "student_code")
