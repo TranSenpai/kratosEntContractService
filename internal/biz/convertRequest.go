@@ -19,7 +19,7 @@ func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract 
 	entity.Email = contract.Email
 	entity.Gender = uint8(contract.Gender)
 	entity.DOB = contract.Dob
-	avatarByte, err := decodeAvatar(&contract.Avatar)
+	avatarByte, err := c.decodeAvatar(&contract.Avatar)
 	if err != nil {
 		return GetError(http.StatusUnprocessableEntity, err)
 	}
@@ -77,11 +77,11 @@ func (c contractBiz) mapStudentInfo(updateList map[string]any, contract *models.
 	c.doMap(updateList, "Email", contract.Email)
 	c.doMap(updateList, "Dob", contract.Dob)
 	c.doMap(updateList, "Gender", contract.Gender)
-	avatarString, err := decodeAvatar(contract.Avatar)
+	avatarByte, err := c.decodeAvatar(contract.Avatar)
 	if err != nil {
 		return GetError(http.StatusUnprocessableEntity, err)
 	}
-	c.doMap(updateList, "Avatar", avatarString)
+	c.doMap(updateList, "Avatar", avatarByte)
 
 	return nil
 }
@@ -129,8 +129,8 @@ func (c contractBiz) convertReplyStudentInfo(replyContract *models.ReplyContract
 	replyContract.Email = &contract.Email
 	gender := uint32(contract.Gender)
 	replyContract.Gender = &gender
-	avatar := encodeAvatar(contract.Avatar)
-	replyContract.Avatar = &avatar
+	avatarStr := c.encodeAvatar(contract.Avatar)
+	replyContract.Avatar = &avatarStr
 
 	return nil
 }
@@ -165,22 +165,9 @@ func (c contractBiz) convertReplyContract(contract *entity.Contract) (*models.Re
 	return replyContract, nil
 }
 
-func DecodeBase64(input string) ([]byte, error) {
-	decoded, err := base64.StdEncoding.DecodeString(input)
-	if err != nil {
-		return nil, GetError(http.StatusInternalServerError, err)
-	}
-
-	return decoded, nil
-}
-
-func EncodeBase64(input []byte) string {
-	return base64.StdEncoding.EncodeToString(input)
-}
-
-func decodeAvatar(avatar *string) ([]byte, error) {
+func (c contractBiz) decodeAvatar(avatar *string) ([]byte, error) {
 	if avatar != nil && *avatar != "" {
-		avatarDecoded, err := DecodeBase64(*avatar)
+		avatarDecoded, err := base64.StdEncoding.DecodeString(*avatar)
 		if err != nil {
 			return nil, GetError(http.StatusUnprocessableEntity, err)
 		}
@@ -190,10 +177,9 @@ func decodeAvatar(avatar *string) ([]byte, error) {
 	return nil, nil
 }
 
-func encodeAvatar(avatar []byte) string {
+func (c contractBiz) encodeAvatar(avatar []byte) string {
 	if avatar != nil {
-		avatarDecoded := EncodeBase64(avatar)
-
+		avatarDecoded := base64.StdEncoding.EncodeToString(avatar)
 		return avatarDecoded
 	}
 
