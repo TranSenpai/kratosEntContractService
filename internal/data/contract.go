@@ -6,7 +6,6 @@ import (
 	entity "dormitory/internal/entities"
 	models "dormitory/internal/models"
 	"errors"
-	"sync"
 
 	"gorm.io/gorm"
 )
@@ -28,11 +27,7 @@ type contractRepo struct {
 	db *gorm.DB
 }
 
-var Mu sync.Mutex
-
 func (cr *contractRepo) CreateContract(ctx context.Context, createContract *entity.Contract) error {
-	Mu.Lock()
-	defer Mu.Unlock()
 	return cr.db.Transaction(func(tx *gorm.DB) error {
 		// str := gorm.ErrInvalidTransaction.Error()
 		// return GetError(errors.New(str))
