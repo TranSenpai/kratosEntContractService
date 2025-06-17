@@ -5,6 +5,8 @@ import (
 	contractApi "dormitory/api/contract"
 	"dormitory/internal/biz"
 	models "dormitory/internal/models"
+	"time"
+	// "github.com/go-kratos/kratos/v2/api/metadata"
 )
 
 type ContractService struct {
@@ -21,10 +23,13 @@ func NewContractService(b biz.IContractBiz) *ContractService {
 // protobuf convert timestamp to UTC
 func (s *ContractService) CreateContract(ctx context.Context, req *contractApi.CreateContractRequest) (*contractApi.CreateContractReply, error) {
 	contract := s.ConvertCreateContractRequest(req)
+	// contract.RegistryAt = time.Date(2025, time.June, 17, 19, 30, 0, 0, time.UTC)
+	contract.RegistryAt = time.Now()
 	err := s.bizContract.CreateContract(ctx, contract)
 	if err != nil {
 		return nil, err
 	}
+
 	return &contractApi.CreateContractReply{Message: "Create successfully"}, nil
 }
 
@@ -63,7 +68,7 @@ func (s *ContractService) GetContract(ctx context.Context, req *contractApi.GetC
 	if err != nil {
 		return nil, err
 	}
-	result := s.ConvertToContractReply(contract, req.Timezone)
+	result := s.ConvertToContractReply(contract)
 	return &contractApi.GetContractReply{Contract: result, Message: "Successfully"}, nil
 }
 
@@ -78,7 +83,7 @@ func (s *ContractService) ListContract(ctx context.Context, req *contractApi.Lis
 	}
 	var result contractApi.ListContractReply
 	for _, v := range contracts {
-		result.Contract = append(result.Contract, s.ConvertToContractReply(&v, req.Timezone))
+		result.Contract = append(result.Contract, s.ConvertToContractReply(&v))
 	}
 
 	return &result, nil

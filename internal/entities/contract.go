@@ -26,7 +26,7 @@ type Contract struct {
 	Address              string     `gorm:"type:varchar(255)"`
 	Avatar               []byte     `gorm:"type:mediumblob"` // Should store varchar(1024) (link img)
 	IsActive             bool       `gorm:"type:boolean; index: idx_is_active"`
-	RegistryAt           time.Time  `gorm:"type:timestamp; autoCreateTime;"`
+	RegistryAt           time.Time  `gorm:"type:timestamp;"`
 	RoomID               string     `gorm:"type:char(5); index: idx_room_id"`
 	NotificationChannels uint8      `gorm:"type:tinyint UNSIGNED;"`
 }

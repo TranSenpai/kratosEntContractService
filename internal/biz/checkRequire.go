@@ -4,7 +4,9 @@ import (
 	"context"
 	models "dormitory/internal/models"
 	"errors"
+	"fmt"
 	"net/http"
+	"time"
 )
 
 func (c contractBiz) checkStudentCode(studentCode string) string {
@@ -83,14 +85,24 @@ func (c contractBiz) checkRoom(ctx context.Context, roomID string) string {
 	if err != nil {
 		return err.Error()
 	}
-	if totalContract.Total > 4 {
+	if totalContract.Total >= 4 {
 		return "room full | "
 	}
 
 	return ""
 }
 
-func (c contractBiz) CheckRequiredField(ctx context.Context, contractModel *models.CreateContract) error {
+func (c contractBiz) checkRegisterTime(registerTime time.Time) string {
+	checkRegisterTime := time.Date(registerTime.Year(), registerTime.Month(), registerTime.Day(), 19, 0, 0, 0, time.UTC)
+	fmt.Println(checkRegisterTime)
+	if registerTime.After(checkRegisterTime) {
+		return "don't sign contract after 7pm please | "
+	}
+
+	return ""
+}
+
+func (c contractBiz) checkRequiredField(ctx context.Context, contractModel *models.CreateContract) error {
 	var strError string
 	if contractModel == nil {
 		return GetError(http.StatusBadRequest, errors.New("nil contract model"))
@@ -101,6 +113,7 @@ func (c contractBiz) CheckRequiredField(ctx context.Context, contractModel *mode
 	strError += c.checkEmail(contractModel.Email)
 	strError += c.checkPhone(contractModel.Phone)
 	strError += c.checkRoom(ctx, contractModel.RoomId)
+	strError += c.checkRegisterTime(contractModel.RegistryAt)
 	if strError == "" {
 		return nil
 	}

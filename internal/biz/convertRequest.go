@@ -38,6 +38,7 @@ func (c contractBiz) convertCreateContractInfo(entity *entity.Contract, contract
 	entity.IsActive = contract.IsActive
 	entity.RoomID = contract.RoomId
 	entity.NotificationChannels = uint8(contract.NotificationChannels)
+	entity.RegistryAt = contract.RegistryAt
 
 	return nil
 }
@@ -162,6 +163,7 @@ func (c contractBiz) convertReplyContract(contract *entity.Contract) (*models.Re
 	if err != nil {
 		return nil, err
 	}
+
 	return replyContract, nil
 }
 

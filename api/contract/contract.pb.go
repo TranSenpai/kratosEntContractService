@@ -671,7 +671,6 @@ func (x *DeleteContractReply) GetMessage() string {
 type GetContractRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Timezone      int32                  `protobuf:"zigzag32,2,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -709,13 +708,6 @@ func (*GetContractRequest) Descriptor() ([]byte, []int) {
 func (x *GetContractRequest) GetId() uint64 {
 	if x != nil {
 		return x.Id
-	}
-	return 0
-}
-
-func (x *GetContractRequest) GetTimezone() int32 {
-	if x != nil {
-		return x.Timezone
 	}
 	return 0
 }
@@ -996,7 +988,6 @@ type ListContractRequest struct {
 	Sign          *IncludeExcludeString  `protobuf:"bytes,12,opt,name=sign,proto3" json:"sign,omitempty"`
 	RegistryAt    *RequestTime           `protobuf:"bytes,13,opt,name=registry_at,json=registryAt,proto3" json:"registry_at,omitempty"`
 	Total         uint32                 `protobuf:"varint,14,opt,name=total,proto3" json:"total,omitempty"`
-	Timezone      int32                  `protobuf:"zigzag32,15,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1125,13 +1116,6 @@ func (x *ListContractRequest) GetRegistryAt() *RequestTime {
 func (x *ListContractRequest) GetTotal() uint32 {
 	if x != nil {
 		return x.Total
-	}
-	return 0
-}
-
-func (x *ListContractRequest) GetTimezone() int32 {
-	if x != nil {
-		return x.Timezone
 	}
 	return 0
 }
@@ -1483,7 +1467,7 @@ const file_contract_contract_proto_rawDesc = "" +
 	"_is_activeB\a\n" +
 	"\x05_signB\x0e\n" +
 	"\f_registry_atB\x18\n" +
-	"\x16_notification_channels\"\xfd\x04\n" +
+	"\x16_notification_channels\"\xbe\x04\n" +
 	"\x15CreateContractRequest\x12+\n" +
 	"\fstudent_code\x18\x01 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
 	"R\vstudentCode\x120\n" +
@@ -1498,8 +1482,8 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x05email\x18\x05 \x01(\tB\a\xfaB\x04r\x02`\x01R\x05email\x12\x1e\n" +
 	"\x05phone\x18\x06 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
 	"R\x05phone\x12\x1f\n" +
-	"\x06gender\x18\a \x01(\rB\a\xfaB\x04*\x02(\x00R\x06gender\x12k\n" +
-	"\x03dob\x18\b \x01(\v2\x1a.google.protobuf.TimestampB=\xfaB:r826^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[0-1])$R\x03dob\x12\x18\n" +
+	"\x06gender\x18\a \x01(\rB\a\xfaB\x04*\x02(\x00R\x06gender\x12,\n" +
+	"\x03dob\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x18\n" +
 	"\aaddress\x18\t \x01(\tR\aaddress\x12\x16\n" +
 	"\x06avatar\x18\n" +
 	" \x01(\tR\x06avatar\x123\n" +
@@ -1508,7 +1492,7 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x04sign\x18\r \x01(\tR\x04sign\x12<\n" +
 	"\x15notification_channels\x18\x0e \x01(\rB\a\xfaB\x04*\x02(\x00R\x14notificationChannels\"/\n" +
 	"\x13CreateContractReply\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x95\a\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xd6\x06\n" +
 	"\x15UpdateContractRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x042\x02(\x01R\x02id\x120\n" +
 	"\fstudent_code\x18\x02 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
@@ -1524,8 +1508,8 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x05email\x18\x06 \x01(\tB\a\xfaB\x04r\x02`\x01H\x04R\x05email\x88\x01\x01\x12#\n" +
 	"\x05phone\x18\a \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
 	"H\x05R\x05phone\x88\x01\x01\x12$\n" +
-	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00H\x06R\x06gender\x88\x01\x01\x12p\n" +
-	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampB=\xfaB:r826^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[0-1])$H\aR\x03dob\x88\x01\x01\x12\x1d\n" +
+	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00H\x06R\x06gender\x88\x01\x01\x121\n" +
+	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\aR\x03dob\x88\x01\x01\x12\x1d\n" +
 	"\aaddress\x18\n" +
 	" \x01(\tH\bR\aaddress\x88\x01\x01\x12\x1b\n" +
 	"\x06avatar\x18\v \x01(\tH\tR\x06avatar\x88\x01\x01\x128\n" +
@@ -1557,10 +1541,9 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x15DeleteContractRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x04\"\x02(\x01R\x02id\"/\n" +
 	"\x13DeleteContractReply\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"I\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"-\n" +
 	"\x12GetContractRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x04\"\x02(\x01R\x02id\x12\x1a\n" +
-	"\btimezone\x18\x02 \x01(\x11R\btimezone\"c\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x04\"\x02(\x01R\x02id\"c\n" +
 	"\x10GetContractReply\x125\n" +
 	"\bcontract\x18\x01 \x01(\v2\x19.api.v1.contract.ContractR\bcontract\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"b\n" +
@@ -1575,7 +1558,7 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\bexcludes\x18\x02 \x03(\x04B\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"\x8f\x01\n" +
 	"\vRequestTime\x12A\n" +
 	"\tfrom_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\b\xfaB\x05\x92\x01\x02\x18\x01R\bfromTime\x12=\n" +
-	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\b\xfaB\x05\x92\x01\x02\x18\x01R\x06toTime\"\xfe\x06\n" +
+	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\b\xfaB\x05\x92\x01\x02\x18\x01R\x06toTime\"\xe2\x06\n" +
 	"\x13ListContractRequest\x125\n" +
 	"\x02id\x18\x01 \x01(\v2%.api.v1.contract.IncludeExcludeUint64R\x02id\x12H\n" +
 	"\fstudent_code\x18\x02 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\vstudentCode\x12D\n" +
@@ -1594,8 +1577,7 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x04sign\x18\f \x01(\v2%.api.v1.contract.IncludeExcludeStringR\x04sign\x12=\n" +
 	"\vregistry_at\x18\r \x01(\v2\x1c.api.v1.contract.RequestTimeR\n" +
 	"registryAt\x12\x14\n" +
-	"\x05total\x18\x0e \x01(\rR\x05total\x12\x1a\n" +
-	"\btimezone\x18\x0f \x01(\x11R\btimezoneB\f\n" +
+	"\x05total\x18\x0e \x01(\rR\x05totalB\f\n" +
 	"\n" +
 	"_is_active\"d\n" +
 	"\x11ListContractReply\x125\n" +

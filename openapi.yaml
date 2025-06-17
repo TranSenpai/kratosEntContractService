@@ -16,11 +16,6 @@ paths:
                   in: query
                   schema:
                     type: string
-                - name: timezone
-                  in: query
-                  schema:
-                    type: integer
-                    format: sint32
             responses:
                 "200":
                     description: OK
@@ -220,11 +215,6 @@ paths:
                   schema:
                     type: integer
                     format: uint32
-                - name: timezone
-                  in: query
-                  schema:
-                    type: integer
-                    format: sint32
             responses:
                 "200":
                     description: OK

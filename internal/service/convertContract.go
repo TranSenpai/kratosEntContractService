@@ -3,7 +3,6 @@ package service
 import (
 	contractApi "dormitory/api/contract"
 	models "dormitory/internal/models"
-	"time"
 
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -18,7 +17,7 @@ func (s ContractService) ConvertCreateContractRequest(req *contractApi.CreateCon
 	contract.Sign = req.Sign
 	contract.Phone = req.Phone
 	contract.Gender = req.Gender
-	if contract.Dob != nil {
+	if req.Dob != nil {
 		dob := req.Dob.AsTime()
 		contract.Dob = &dob
 	}
@@ -27,6 +26,7 @@ func (s ContractService) ConvertCreateContractRequest(req *contractApi.CreateCon
 	contract.IsActive = req.IsActive
 	contract.RoomId = req.RoomId
 	contract.NotificationChannels = req.NotificationChannels
+
 	return &contract
 }
 
@@ -50,7 +50,7 @@ func (s ContractService) ConvertUpdateContractRequest(req *contractApi.UpdateCon
 	return &contract
 }
 
-func (s ContractService) ConvertToContractReply(contract *models.ReplyContract, timezone int32) *contractApi.Contract {
+func (s ContractService) ConvertToContractReply(contract *models.ReplyContract) *contractApi.Contract {
 	var contractReply contractApi.Contract
 	contractReply.Id = contract.Id
 	contractReply.StudentCode = contract.StudentCode
@@ -70,10 +70,7 @@ func (s ContractService) ConvertToContractReply(contract *models.ReplyContract, 
 		contractReply.RegistryAt = timestamppb.New(*contract.RegistryAt)
 	}
 	if contract.Dob != nil {
-		convertTime := contract.Dob.Unix()
-		convertTime += int64(timezone * 3600)
-		clientTime := time.Unix(convertTime, 0)
-		contractReply.Dob = timestamppb.New(clientTime)
+		contractReply.Dob = timestamppb.New(*contract.Dob)
 	}
 	return &contractReply
 }

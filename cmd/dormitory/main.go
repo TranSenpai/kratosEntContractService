@@ -94,7 +94,7 @@ func main() {
 	if err := c.Load(); err != nil {
 		panic(err)
 	}
-	// conf.Bootsrap is a struct generated from .protoc,
+	// conf.Bootsrap is a struct generated from conf.proto in internal/conf,
 	// including HTTP and gRPC, db
 	var bc conf.Bootstrap
 	// Load all config from yml assign to struct bc

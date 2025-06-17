@@ -18,7 +18,6 @@ type UpdateContract struct {
 	Address              *string
 	Avatar               *string
 	IsActive             *bool
-	RegistryAt           *time.Time
 	RoomID               *string
 	NotificationChannels *uint32
 }

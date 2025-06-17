@@ -17,4 +17,5 @@ type CreateContract struct {
 	IsActive             bool
 	Sign                 string
 	NotificationChannels uint32
+	RegistryAt           time.Time
 }

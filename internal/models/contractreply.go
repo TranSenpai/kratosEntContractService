@@ -17,6 +17,6 @@ type ReplyContract struct {
 	RoomId               *string
 	IsActive             *bool
 	Sign                 *string
-	RegistryAt           *time.Time
 	NotificationChannels *uint32
+	RegistryAt           *time.Time
 }

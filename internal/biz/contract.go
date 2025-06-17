@@ -12,15 +12,16 @@ func (c *contractBiz) CreateContract(ctx context.Context, contract *models.Creat
 	if contract == nil {
 		return GetError(http.StatusUnprocessableEntity, errors.New("contract empty"))
 	}
-	if err := c.CheckRequiredField(ctx, contract); err != nil {
+	if err := c.checkRequiredField(ctx, contract); err != nil {
 		return err
 	}
 	entity, err := c.convertCreateContractRequest(contract)
 	if err != nil {
 		return err
 	}
+	err = c.contractRepo.CreateContract(ctx, entity)
 
-	return c.contractRepo.CreateContract(ctx, entity)
+	return err
 }
 
 func (c *contractBiz) UpdateContract(ctx context.Context, contract *models.UpdateContract, filter *models.ContractFilter) error {
