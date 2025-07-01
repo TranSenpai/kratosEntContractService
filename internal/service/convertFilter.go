@@ -25,6 +25,10 @@ func (s ContractService) ConvertStudentInfo(filter *models.ContractFilter, req *
 		filter.Id.Includes = CheckRequest(req.Id.Includes)
 		filter.Id.Excludes = CheckRequest(req.Id.Excludes)
 	}
+	if req.StudentCode != nil {
+		filter.StudentCode.Includes = CheckRequest(req.StudentCode.Includes)
+		filter.StudentCode.Excludes = CheckRequest(req.StudentCode.Excludes)
+	}
 	if req.FirstName != nil {
 		filter.FirstName.Includes = CheckRequest(req.FirstName.Includes)
 		filter.FirstName.Excludes = CheckRequest(req.FirstName.Excludes)

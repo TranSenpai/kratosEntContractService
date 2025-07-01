@@ -27,6 +27,7 @@ init:
 
 
 INTERNAL_PROTO_FILES := $(shell find internal -name "*.proto")
+
 .PHONY: config
 # generate internal proto
 config:

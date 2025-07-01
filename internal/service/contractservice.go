@@ -40,6 +40,7 @@ func (s *ContractService) UpdateContract(ctx context.Context, req *contractApi.U
 	if err := s.bizContract.UpdateContract(ctx, contract, &filter); err != nil {
 		return nil, err
 	}
+
 	return &contractApi.UpdateContractReply{
 		Message: "Successfully",
 	}, nil
@@ -50,6 +51,7 @@ func (s *ContractService) SignContract(ctx context.Context, req *contractApi.Sig
 	if err != nil {
 		return nil, err
 	}
+
 	return &contractApi.SignReply{
 		Message: "Sign successfully",
 	}, nil
@@ -60,6 +62,7 @@ func (s *ContractService) DeleteContract(ctx context.Context, req *contractApi.D
 	if err := s.bizContract.DeleteContract(ctx, contractID); err != nil {
 		return nil, err
 	}
+
 	return &contractApi.DeleteContractReply{Message: "Successfully"}, nil
 }
 
@@ -69,6 +72,7 @@ func (s *ContractService) GetContract(ctx context.Context, req *contractApi.GetC
 		return nil, err
 	}
 	result := s.ConvertToContractReply(contract)
+
 	return &contractApi.GetContractReply{Contract: result, Message: "Successfully"}, nil
 }
 

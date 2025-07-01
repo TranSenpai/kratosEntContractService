@@ -95,7 +95,7 @@ func (cr contractRepo) ListContract(ctx context.Context, filter *models.Contract
 func (cr contractRepo) GetTotalContractRoom(ctx context.Context, roomID string) (models.TotalContractsEachRoom, error) {
 	var result models.TotalContractsEachRoom
 	err := cr.db.Debug().Model(&entity.Contract{}).Select("COUNT(id) as total, room_id").
-		Group("room_id").Find(&result).Error
+		Where("room_id = ?", roomID).Group("room_id").Find(&result).Error
 	if err != nil {
 		GetError(err)
 	}

@@ -96,7 +96,7 @@ func (c contractBiz) checkRegisterTime(registerTime time.Time) string {
 	checkRegisterTime := time.Date(registerTime.Year(), registerTime.Month(), registerTime.Day(), 19, 0, 0, 0, time.UTC)
 	fmt.Println(checkRegisterTime)
 	if registerTime.After(checkRegisterTime) {
-		return "don't sign contract after 7pm please | "
+		return "don't create contract after 7pm please | "
 	}
 
 	return ""
