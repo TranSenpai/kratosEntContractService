@@ -1,16 +1,17 @@
 package biz
 
 import (
-	entity "dormitory/internal/entities"
+	entity "dormitory/internal/ent"
 	models "dormitory/internal/models"
 	"encoding/base64"
 	"errors"
 	"net/http"
+	"time"
 )
 
 func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract *models.CreateContract) error {
 	if entity == nil || contract == nil {
-		return GetError(http.StatusUnprocessableEntity, errors.New("create contract or entity nil"))
+		return GetError(http.StatusUnprocessableEntity, errors.New("create contract or ent nil"))
 	}
 	entity.StudentCode = contract.StudentCode
 	entity.FirstName = contract.FirstName
@@ -18,7 +19,9 @@ func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract 
 	entity.MiddleName = contract.MiddleName
 	entity.Email = contract.Email
 	entity.Gender = uint8(contract.Gender)
-	entity.DOB = contract.Dob
+	if contract.Dob != nil {
+		entity.Dob = *contract.Dob
+	}
 	avatarByte, err := c.decodeAvatar(&contract.Avatar)
 	if err != nil {
 		return GetError(http.StatusUnprocessableEntity, err)
@@ -30,7 +33,7 @@ func (c contractBiz) convertCreateStudentInfo(entity *entity.Contract, contract 
 
 func (c contractBiz) convertCreateContractInfo(entity *entity.Contract, contract *models.CreateContract) error {
 	if entity == nil || contract == nil {
-		return GetError(http.StatusUnprocessableEntity, errors.New("create contract or entity nil"))
+		return GetError(http.StatusUnprocessableEntity, errors.New("create contract or ent nil"))
 	}
 	entity.Sign = contract.Sign
 	entity.Phone = contract.Phone
@@ -45,7 +48,7 @@ func (c contractBiz) convertCreateContractInfo(entity *entity.Contract, contract
 
 func (c contractBiz) convertCreateContractRequest(contract *models.CreateContract) (*entity.Contract, error) {
 	if contract == nil {
-		return nil, GetError(http.StatusUnprocessableEntity, errors.New("create contract or entity nil"))
+		return nil, GetError(http.StatusUnprocessableEntity, errors.New("create contract or ent nil"))
 	}
 	entity := &entity.Contract{}
 	err := c.convertCreateStudentInfo(entity, contract)
@@ -60,29 +63,44 @@ func (c contractBiz) convertCreateContractRequest(contract *models.CreateContrac
 	return entity, nil
 }
 
-func (c contractBiz) doMap(updateList map[string]any, key string, value any) {
-	if value != nil {
-		updateList[key] = value
-	}
-}
-
 func (c contractBiz) mapStudentInfo(updateList map[string]any, contract *models.UpdateContract) error {
 	if contract == nil {
 		return GetError(http.StatusUnprocessableEntity, errors.New("update contract nil"))
 	}
-	c.doMap(updateList, "ID", contract.ID)
-	c.doMap(updateList, "StudentCode", contract.StudentCode)
-	c.doMap(updateList, "FirstName", contract.FirstName)
-	c.doMap(updateList, "LastName", contract.LastName)
-	c.doMap(updateList, "MiddleName", contract.MiddleName)
-	c.doMap(updateList, "Email", contract.Email)
-	c.doMap(updateList, "Dob", contract.Dob)
-	c.doMap(updateList, "Gender", contract.Gender)
+	if contract.ID != nil {
+		updateList["ID"] = *contract.ID
+	}
+	if contract.StudentCode != nil {
+		updateList["StudentCode"] = *contract.StudentCode
+	}
+	if contract.FirstName != nil {
+		updateList["FirstName"] = *contract.FirstName
+	}
+	if contract.LastName != nil {
+		updateList["LastName"] = *contract.LastName
+	}
+	if contract.MiddleName != nil {
+		updateList["MiddleName"] = *contract.MiddleName
+	}
+	if contract.Email != nil {
+		updateList["Email"] = *contract.Email
+	}
+	if contract.Dob != nil {
+		if time.Time.IsZero(*contract.Dob) {
+			updateList["Dob"] = *contract.Dob
+		}
+	}
+	if contract.Gender != nil {
+		gender := *contract.Gender
+		updateList["Gender"] = uint8(gender)
+	}
 	avatarByte, err := c.decodeAvatar(contract.Avatar)
 	if err != nil {
 		return GetError(http.StatusUnprocessableEntity, err)
 	}
-	c.doMap(updateList, "Avatar", avatarByte)
+	if contract.Avatar != nil {
+		updateList["Avatar"] = avatarByte
+	}
 
 	return nil
 }
@@ -91,12 +109,24 @@ func (c contractBiz) mapContractInfo(updateList map[string]any, contract *models
 	if contract == nil || updateList == nil {
 		return GetError(http.StatusUnprocessableEntity, errors.New("update contract nil"))
 	}
-	c.doMap(updateList, "Sign", contract.Sign)
-	c.doMap(updateList, "Phone", contract.Phone)
-	c.doMap(updateList, "IsActive", contract.IsActive)
-	c.doMap(updateList, "Address", contract.Address)
-	c.doMap(updateList, "RoomID", contract.RoomID)
-	c.doMap(updateList, "NotificationChannels", contract.NotificationChannels)
+	if contract.Sign != nil {
+		updateList["Sign"] = *contract.Sign
+	}
+	if contract.Phone != nil {
+		updateList["Phone"] = *contract.Phone
+	}
+	if contract.IsActive != nil {
+		updateList["IsActive"] = *contract.IsActive
+	}
+	if contract.Address != nil {
+		updateList["Address"] = *contract.Address
+	}
+	if contract.RoomID != nil {
+		updateList["RoomID"] = *contract.RoomID
+	}
+	if contract.NotificationChannels != nil {
+		updateList["NotificationChannels"] = *contract.NotificationChannels
+	}
 
 	return nil
 }
@@ -120,35 +150,35 @@ func (c contractBiz) convertUpdateContractRequest(contract *models.UpdateContrac
 
 func (c contractBiz) convertReplyStudentInfo(replyContract *models.ReplyContract, contract *entity.Contract) error {
 	if replyContract == nil || contract == nil {
-		return GetError(http.StatusUnprocessableEntity, errors.New("reply contract or entity nil"))
+		return GetError(http.StatusUnprocessableEntity, errors.New("reply contract or ent nil"))
 	}
-	replyContract.Id = &contract.ID
-	replyContract.StudentCode = &contract.StudentCode
-	replyContract.FirstName = &contract.FirstName
-	replyContract.LastName = &contract.LastName
-	replyContract.MiddleName = &contract.MiddleName
-	replyContract.Email = &contract.Email
+	replyContract.Id = contract.ID
+	replyContract.StudentCode = contract.StudentCode
+	replyContract.FirstName = contract.FirstName
+	replyContract.LastName = contract.LastName
+	replyContract.MiddleName = contract.MiddleName
+	replyContract.Email = contract.Email
 	gender := uint32(contract.Gender)
-	replyContract.Gender = &gender
+	replyContract.Gender = gender
 	avatarStr := c.encodeAvatar(contract.Avatar)
-	replyContract.Avatar = &avatarStr
+	replyContract.Avatar = avatarStr
 
 	return nil
 }
 
 func (c contractBiz) convertReplyContractInfo(replyContract *models.ReplyContract, contract *entity.Contract) error {
 	if replyContract == nil || contract == nil {
-		return GetError(http.StatusUnprocessableEntity, errors.New("reply contract or entity nil"))
+		return GetError(http.StatusUnprocessableEntity, errors.New("reply contract or ent nil"))
 	}
-	replyContract.Sign = &contract.Sign
-	replyContract.Phone = &contract.Phone
-	replyContract.Dob = contract.DOB
-	replyContract.Address = &contract.Address
-	replyContract.IsActive = &contract.IsActive
-	replyContract.RegistryAt = &contract.RegistryAt
-	replyContract.RoomId = &contract.RoomID
+	replyContract.Sign = contract.Sign
+	replyContract.Phone = contract.Phone
+	replyContract.Dob = contract.Dob
+	replyContract.Address = contract.Address
+	replyContract.IsActive = contract.IsActive
+	replyContract.RegistryAt = contract.RegistryAt
+	replyContract.RoomId = contract.RoomID
 	notification := uint32(contract.NotificationChannels)
-	replyContract.NotificationChannels = &notification
+	replyContract.NotificationChannels = notification
 
 	return nil
 }

@@ -19,13 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ContractService_CreateContract_FullMethodName            = "/api.v1.contract.ContractService/CreateContract"
-	ContractService_UpdateContract_FullMethodName            = "/api.v1.contract.ContractService/UpdateContract"
-	ContractService_SignContract_FullMethodName              = "/api.v1.contract.ContractService/SignContract"
-	ContractService_DeleteContract_FullMethodName            = "/api.v1.contract.ContractService/DeleteContract"
-	ContractService_GetContract_FullMethodName               = "/api.v1.contract.ContractService/GetContract"
-	ContractService_ListContract_FullMethodName              = "/api.v1.contract.ContractService/ListContract"
-	ContractService_ListTotalContractEachRoom_FullMethodName = "/api.v1.contract.ContractService/ListTotalContractEachRoom"
+	ContractService_CreateContract_FullMethodName            = "/api.contract.ContractService/CreateContract"
+	ContractService_UpdateContract_FullMethodName            = "/api.contract.ContractService/UpdateContract"
+	ContractService_SignContract_FullMethodName              = "/api.contract.ContractService/SignContract"
+	ContractService_DeleteContract_FullMethodName            = "/api.contract.ContractService/DeleteContract"
+	ContractService_GetContract_FullMethodName               = "/api.contract.ContractService/GetContract"
+	ContractService_ListContract_FullMethodName              = "/api.contract.ContractService/ListContract"
+	ContractService_ListTotalContractEachRoom_FullMethodName = "/api.contract.ContractService/ListTotalContractEachRoom"
 )
 
 // ContractServiceClient is the client API for ContractService service.
@@ -312,7 +312,7 @@ func _ContractService_ListTotalContractEachRoom_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ContractService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.v1.contract.ContractService",
+	ServiceName: "api.contract.ContractService",
 	HandlerType: (*ContractServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

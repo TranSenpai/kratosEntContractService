@@ -22,8 +22,15 @@ func (s ContractService) ConvertStudentInfo(filter *models.ContractFilter, req *
 		return kerror.New(http.StatusUnprocessableEntity, "Service error|", "nil filter")
 	}
 	if req.Id != nil {
-		filter.Id.Includes = CheckRequest(req.Id.Includes)
-		filter.Id.Excludes = CheckRequest(req.Id.Excludes)
+		var idInclude, idExclude []int
+		for _, v := range req.Id.Includes {
+			idInclude = append(idInclude, int(v))
+		}
+		for _, v := range req.Id.Excludes {
+			idExclude = append(idExclude, int(v))
+		}
+		filter.Id.Includes = CheckRequest(idInclude)
+		filter.Id.Excludes = CheckRequest(idExclude)
 	}
 	if req.StudentCode != nil {
 		filter.StudentCode.Includes = CheckRequest(req.StudentCode.Includes)

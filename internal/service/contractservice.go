@@ -36,7 +36,7 @@ func (s *ContractService) CreateContract(ctx context.Context, req *contractApi.C
 func (s *ContractService) UpdateContract(ctx context.Context, req *contractApi.UpdateContractRequest) (*contractApi.UpdateContractReply, error) {
 	contract := s.ConvertUpdateContractRequest(req)
 	var filter models.ContractFilter
-	filter.Id.Includes = append(filter.Id.Includes, req.Id)
+	filter.Id.Includes = append(filter.Id.Includes, int(req.Id))
 	if err := s.bizContract.UpdateContract(ctx, contract, &filter); err != nil {
 		return nil, err
 	}
@@ -47,7 +47,9 @@ func (s *ContractService) UpdateContract(ctx context.Context, req *contractApi.U
 }
 
 func (s *ContractService) SignContract(ctx context.Context, req *contractApi.SignRequest) (*contractApi.SignReply, error) {
-	err := s.bizContract.SignContract(ctx, req.Id, req.Sign)
+	var filter models.ContractFilter
+	filter.Id.Includes = append(filter.Id.Includes, int(req.Id))
+	err := s.bizContract.SignContract(ctx, &filter, req.Sign)
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +60,9 @@ func (s *ContractService) SignContract(ctx context.Context, req *contractApi.Sig
 }
 
 func (s *ContractService) DeleteContract(ctx context.Context, req *contractApi.DeleteContractRequest) (*contractApi.DeleteContractReply, error) {
-	contractID := req.Id
-	if err := s.bizContract.DeleteContract(ctx, contractID); err != nil {
+	var filter models.ContractFilter
+	filter.Id.Includes = append(filter.Id.Includes, int(req.Id))
+	if err := s.bizContract.DeleteContract(ctx, &filter); err != nil {
 		return nil, err
 	}
 
@@ -67,7 +70,9 @@ func (s *ContractService) DeleteContract(ctx context.Context, req *contractApi.D
 }
 
 func (s *ContractService) GetContract(ctx context.Context, req *contractApi.GetContractRequest) (*contractApi.GetContractReply, error) {
-	contract, err := s.bizContract.GetContract(ctx, req.Id)
+	var filter models.ContractFilter
+	filter.Id.Includes = append(filter.Id.Includes, int(req.Id))
+	contract, err := s.bizContract.GetContract(ctx, &filter)
 	if err != nil {
 		return nil, err
 	}

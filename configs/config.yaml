@@ -1,20 +1,20 @@
 server:
   http:
     addr: 0.0.0.0:8000
-    timeout: 1s
+    timeout: 300s
   grpc:
     addr: 0.0.0.0:9000
-    timeout: 1s
+    timeout: 300s
 data:
   database:
-    driver: mysql
-    username: root
-    password: vlMlgi@8cH*p6o#A4uB8
+    driver: postgres
+    username: chuong
+    password: 4SPIn5wridRuxoml8LD
     host: 127.0.0.1
-    port: "3306"
-    dbname: chuong
+    port: "5432"
+    dbname: postgres-db
     # The application (server) is local time
-    params: "?charset=utf8mb4&parseTime=True&loc=UTC"
+    params: "sslmode=disable&search_path=public"
     # Asia%2FHo_Chi_Minh, UTC, Local, Singapore
   redis:
     addr: 127.0.0.1:6379

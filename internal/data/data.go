@@ -1,37 +1,31 @@
 package data
 
 import (
+	"dormitory/internal/ent"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
-
-	"gorm.io/gorm"
 )
 
-var ProviderSet = wire.NewSet(NewData, NewContractRepo, NewMySQL, NewDatabaseConfig)
+var ProviderSet = wire.NewSet(NewData, NewContractRepo, NewEntClient, NewDatabaseConfig)
 
 type Data struct {
-	db  *gorm.DB
-	log *log.Helper
+	dbPostgres *ent.Client
+	log        *log.Helper
 }
 
-func (d *Data) DB() *gorm.DB {
-	return d.db
+func (d *Data) DB() *ent.Client {
+	return d.dbPostgres
 }
 
-func NewData(database *gorm.DB, logger log.Logger) (*Data, func(), error) {
+func NewData(database *ent.Client, logger log.Logger) (*Data, func(), error) {
 	logHelper := log.NewHelper(log.With(logger, "module", "contract-service/data"))
 	// Clean-up function
 	cleanup := func() {
-		sqlDB, err := database.DB()
-		if err == nil {
-			sqlDB.Close()
-		} else {
-			logHelper.Error(err)
-		}
+		database.Close()
 	}
 	data := &Data{
-		db:  database,
-		log: logHelper,
+		dbPostgres: database,
+		log:        logHelper,
 	}
 
 	return data, cleanup, nil

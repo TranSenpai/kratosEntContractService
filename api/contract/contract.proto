@@ -1,94 +1,57 @@
 syntax = "proto3";
 
-package api.v1.contract;
+package api.contract;
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "dormitory/api/contract;contract";
+option go_package = "kratosDormitory/dormitory/api/contract;contract";
 
 service ContractService {
-	rpc CreateContract (CreateContractRequest) returns (CreateContractReply) {
-		option (google.api.http) = {
-	    	post: "/api/v1/contracts"	
-		    body: "*"
-		};
-	}
-
-	rpc UpdateContract (UpdateContractRequest) returns (UpdateContractReply) {
-		option (google.api.http) = {
-	    	put: "/api/v1/contracts/{id}"	
-		    body: "*"
-		};
-	}
-
-	rpc SignContract (SignRequest) returns (SignReply) {
-		option (google.api.http) = {
-			patch: "/api/v1/contracts/{id}/sign"
-			body: "*"
-		};
-	}
-
-	rpc DeleteContract (DeleteContractRequest) returns (DeleteContractReply) {
-	  	option (google.api.http) = {
-	  		delete: "/api/v1/contracts"
-	  	};
-	}
-
-	rpc GetContract (GetContractRequest) returns (GetContractReply) {
-	  	option (google.api.http) = {
-		    get: "/api/v1/contracts"
-	  	};
-	}
-
-	rpc ListContract (ListContractRequest) returns (ListContractReply) {
-		option (google.api.http) = {
-			get: "/api/v1/contracts/list"
-		};
-	}
-
-	rpc ListTotalContractEachRoom (ListTotalContractEachRoomRequest) returns (ListTotalContractEachRoomReply) {
-		option (google.api.http) = {
-			get: "/api/v1/contracts/rooms/least"
-		};
-	}
+	rpc CreateContract (CreateContractRequest) returns (CreateContractReply);
+	rpc UpdateContract (UpdateContractRequest) returns (UpdateContractReply) ;
+	rpc SignContract (SignRequest) returns (SignReply) ;
+	rpc DeleteContract (DeleteContractRequest) returns (DeleteContractReply);
+	rpc GetContract (GetContractRequest) returns (GetContractReply);
+	rpc ListContract (ListContractRequest) returns (ListContractReply);
+	rpc ListTotalContractEachRoom (ListTotalContractEachRoomRequest) returns (ListTotalContractEachRoomReply);
 }
 
 message Contract {
-	optional uint64 id 								= 1 [(validate.rules).uint64 = {gte: 1}]; 
-	optional string student_code 					= 2 [(validate.rules).string.len = 10];
-	optional string first_name 						= 3 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string last_name 						= 4 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string middle_name 					= 5 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string email 							= 6 [(validate.rules).string.email = true];
-  	optional string phone 							= 7 [(validate.rules).string.len = 10];
-  	optional uint32 gender							= 8 [(validate.rules).uint32 = {gte: 0}];
-	optional google.protobuf.Timestamp dob 			= 9;
-  	optional string address							= 10;
-	optional string avatar 							= 11;
-	optional string room_id 						= 12 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
-  	optional bool is_active 						= 13;
-  	optional string sign 							= 14;
-	optional google.protobuf.Timestamp registry_at 	= 15;
-  	optional uint32 notification_channels 			= 16 [(validate.rules).uint32 = {gte: 0}];
+	int32 id 																				= 1 [(validate.rules).int32 = {gte: 1}];
+	string student_code 														= 2 [(validate.rules).string.len = 10];
+	string first_name 															= 3 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string last_name 																= 4 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string middle_name 															= 5 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string email 																		= 6 [(validate.rules).string.email = true];
+  string phone 																		= 7 [(validate.rules).string.len = 10];
+  uint32 gender																		= 8 [(validate.rules).uint32 = {gte: 0}];
+	google.protobuf.Timestamp dob 									= 9;
+  string address																	= 10;
+	string avatar 																	= 11;
+	string room_id 																	= 12 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
+  bool is_active 																	= 13;
+  string sign 																		= 14;
+	google.protobuf.Timestamp registry_at 					= 15;
+  uint32 notification_channels 										= 16 [(validate.rules).uint32 = {gte: 0}];
 }
 
 message CreateContractRequest {
-	string student_code 					= 1 [(validate.rules).string.len = 10];
-  	string first_name 						= 2 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	string last_name 						= 3 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	string middle_name 						= 4 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	string email							= 5 [(validate.rules).string.email = true];
-  	string phone							= 6 [(validate.rules).string.len = 10];
-  	uint32 gender							= 7 [(validate.rules).uint32 = {gte: 0}];
-	google.protobuf.Timestamp dob			= 8;
-  	string address							= 9;
-	string avatar 							= 10;
-	string room_id							= 11 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
-  	bool is_active							= 12;
-  	string sign								= 13;
-  	uint32 notification_channels 			= 14 [(validate.rules).uint32 = {gte: 0}];	
+	string student_code 														= 1 [(validate.rules).string.len = 10];
+  string first_name 															= 2 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string last_name 																= 3 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string middle_name 															= 4 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  string email																		= 5 [(validate.rules).string.email = true];
+  string phone																		= 6 [(validate.rules).string.len = 10];
+  uint32 gender																		= 7 [(validate.rules).uint32 = {gte: 0}];
+	google.protobuf.Timestamp dob										= 8;
+  string address																	= 9;
+	string avatar 																	= 10;
+	string room_id																	= 11 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
+  bool is_active																	= 12;
+  string sign																			= 13;
+  uint32 notification_channels 										= 14 [(validate.rules).uint32 = {gte: 0}];
 }
 
 message CreateContractReply {
@@ -96,42 +59,42 @@ message CreateContractReply {
 }
 
 message UpdateContractRequest {
-	uint64 id	 							= 1 [(validate.rules).uint64 = {gte: 1}];
-	optional string student_code 			= 2 [(validate.rules).string.len = 10];
-  	optional string first_name 				= 3 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string last_name 				= 4 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string middle_name 			= 5 [(validate.rules).string.pattern = "^[A-Za-z]$"];
-  	optional string email 					= 6 [(validate.rules).string.email = true];
-  	optional string phone 					= 7 [(validate.rules).string.len = 10];
-  	optional uint32 gender					= 8 [(validate.rules).uint32 = {gte: 0}];
-	optional google.protobuf.Timestamp dob 	= 9;
-  	optional string address					= 10;
-	optional string avatar 					= 11;
-	optional string room_id 				= 12 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
-  	optional bool is_active 				= 13;
-  	optional string sign 					= 14;
-  	optional uint32 notification_channels 	= 15 [(validate.rules).uint32 = {gte: 0}];	
+	int32 id	 																			= 1 [(validate.rules).int32 = {gte: 1}];
+	optional string student_code 										= 2 [(validate.rules).string.len = 10];
+  optional string first_name 											= 3 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  optional string last_name 											= 4 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  optional string middle_name 										= 5 [(validate.rules).string.pattern = "^[A-Za-z]+$"];
+  optional string email 													= 6 [(validate.rules).string.email = true];
+  optional string phone 													= 7 [(validate.rules).string = {len: 10}];
+  optional uint32 gender													= 8 [(validate.rules).uint32 = {gte: 0}];
+	google.protobuf.Timestamp dob 									= 9;
+  optional string address													= 10;
+	optional string avatar 													= 11;
+	optional string room_id 												= 12 [(validate.rules).string.pattern = "^([A-Z])([0-9]{4}$)"];
+  optional bool is_active 												= 13;
+  optional string sign 														= 14;
+  optional uint32 notification_channels 					= 15 [(validate.rules).uint32 = {gte: 0}];
 }
 
 message UpdateContractReply {
-	string message = 1;
+	string message 			= 1;
 }
 
 message DeleteContractRequest {
-  	uint64 id = 1 [(validate.rules).int64 = {gte: 1}];
+	int32 id 						= 1 [(validate.rules).int32 = {gte: 1}];
 }
 
 message DeleteContractReply {
-  	string message = 1;
+	string message		 	= 1;
 }
 
 message GetContractRequest {
-	uint64 id 			= 1 [(validate.rules).int64 = {gte: 1}];
+	int32 id 						= 1 [(validate.rules).int32 = {gte: 1}];
 }
 
 message GetContractReply {
-  	Contract contract	= 1;
-	string message		= 2;
+	Contract contract		= 1;
+	string message			= 2;
 }
 
 message IncludeExcludeString {
@@ -144,41 +107,41 @@ message IncludeExcludeUint32 {
 	repeated uint32 excludes = 2 [(validate.rules).repeated = {unique: true}];
 }
 
-message IncludeExcludeUint64 {
-	repeated uint64 includes = 1 [(validate.rules).repeated = {unique: true}];
-	repeated uint64 excludes = 2 [(validate.rules).repeated = {unique: true}];
+message IncludeExcludeInt32 {
+	repeated int32 includes = 1 [(validate.rules).repeated = {unique: true}];
+	repeated int32 excludes = 2 [(validate.rules).repeated = {unique: true}];
 }
 
 message RequestTime {
-	google.protobuf.Timestamp from_time = 1 [(validate.rules).repeated = {unique: true}];
-	google.protobuf.Timestamp to_time 	= 2 [(validate.rules).repeated = {unique: true}];
+	google.protobuf.Timestamp from_time 	= 1;
+	google.protobuf.Timestamp to_time 		= 2;
 }
 
 message ListContractRequest {
-  	IncludeExcludeUint64 id 				= 1;
+	IncludeExcludeInt32 id 								= 1;
 	IncludeExcludeString student_code 		= 2;
-  	IncludeExcludeString first_name 		= 3;
-  	IncludeExcludeString last_name 			= 4;
-  	IncludeExcludeString middle_name		= 5;
-  	IncludeExcludeString email 				= 6;
-  	IncludeExcludeString phone 				= 7;
-  	IncludeExcludeUint32 gender				= 8;
-  	IncludeExcludeString address			= 9;
-	IncludeExcludeString room_id 			= 10;
-  	optional bool is_active 				= 11;
-  	IncludeExcludeString sign				= 12;
-	RequestTime registry_at					= 13;
-	uint32 total 							= 14;
+  IncludeExcludeString first_name 			= 3;
+  IncludeExcludeString last_name 				= 4;
+  IncludeExcludeString middle_name			= 5;
+  IncludeExcludeString email 						= 6;
+  IncludeExcludeString phone 						= 7;
+  IncludeExcludeUint32 gender						= 8;
+  IncludeExcludeString address					= 9;
+	IncludeExcludeString room_id 					= 10;
+  optional bool is_active 							= 11;
+  IncludeExcludeString sign							= 12;
+	RequestTime registry_at								= 13;
+	uint32 total 													= 14;
 }
 
 message ListContractReply {
-	repeated Contract contract 	= 1;	
-	string message				= 2;
+	repeated Contract contract 						= 1;
+	string message												= 2;
 }
 
 message SignRequest {
-	uint64 id		= 1 [(validate.rules).uint64 = {gte: 1}];
-	string sign		= 2;
+	int32 id				= 1 [(validate.rules).int32 = {gte: 1}];
+	string sign			= 2;
 }
 
 message SignReply {
@@ -192,10 +155,10 @@ message ListTotalContractEachRoomRequest {
 message ListTotalContractEachRoomReply {
 	message ContractEachRoom{
 		string room_id 	= 1;
-		uint32 total	= 2;
+		uint32 total		= 2;
 	}	
 	repeated ContractEachRoom contractEachRoom 		= 1;
-	string message 									= 2;
+	string message 																= 2;
 }
 
 

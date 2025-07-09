@@ -1,11 +1,10 @@
 package main
 
 import (
-	"flag"
-	"os"
-
 	"dormitory/internal/conf"
 	"dormitory/internal/data"
+	"flag"
+	"os"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -13,7 +12,6 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
-	"github.com/go-kratos/kratos/v2/transport/http"
 
 	_ "go.uber.org/automaxprocs"
 )
@@ -31,44 +29,25 @@ var (
 )
 
 func init() {
-	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
+	flag.StringVar(&flagconf, "conf", "configs/config.yaml", "config file path, e.g. -conf configs/config.yaml")
 }
 
-func newAppWithData(logger log.Logger, gs *grpc.Server, hs *http.Server, data *data.Data) (*kratos.App, error) {
+func newApp(logger log.Logger, gs *grpc.Server, data *data.Data) (*kratos.App, error) {
 	logHelper := log.NewHelper(log.With(logger, "module", "main"))
-
 	if err := data.InitSchema(); err != nil {
 		logHelper.Errorf("Schema init failed: %v", err)
 	}
-
 	app := kratos.New(
 		kratos.ID(id),
 		kratos.Name(Name),
 		kratos.Version(Version),
 		kratos.Metadata(map[string]string{}),
 		kratos.Logger(logger),
-		kratos.Server(
-			gs,
-			hs,
-		),
+		kratos.Server(gs),
 	)
 
 	return app, nil
 }
-
-// func newApp(logger log.Logger, gs *grpc.Server, hs *http.Server) *kratos.App {
-// 	return kratos.New(
-// 		kratos.ID(id),
-// 		kratos.Name(Name),
-// 		kratos.Version(Version),
-// 		kratos.Metadata(map[string]string{}),
-// 		kratos.Logger(logger),
-// 		kratos.Server(
-// 			gs,
-// 			hs,
-// 		),
-// 	)
-// }
 
 func main() {
 	flag.Parse()

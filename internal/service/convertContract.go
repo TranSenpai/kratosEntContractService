@@ -52,7 +52,7 @@ func (s ContractService) ConvertUpdateContractRequest(req *contractApi.UpdateCon
 
 func (s ContractService) ConvertToContractReply(contract *models.ReplyContract) *contractApi.Contract {
 	var contractReply contractApi.Contract
-	contractReply.Id = contract.Id
+	contractReply.Id = int32(contract.Id)
 	contractReply.StudentCode = contract.StudentCode
 	contractReply.FirstName = contract.FirstName
 	contractReply.LastName = contract.LastName
@@ -66,11 +66,8 @@ func (s ContractService) ConvertToContractReply(contract *models.ReplyContract) 
 	contractReply.IsActive = contract.IsActive
 	contractReply.Sign = contract.Sign
 	contractReply.NotificationChannels = contract.NotificationChannels
-	if contract.RegistryAt != nil {
-		contractReply.RegistryAt = timestamppb.New(*contract.RegistryAt)
-	}
-	if contract.Dob != nil {
-		contractReply.Dob = timestamppb.New(*contract.Dob)
-	}
+	contractReply.RegistryAt = timestamppb.New(contract.RegistryAt)
+	contractReply.Dob = timestamppb.New(contract.Dob)
+
 	return &contractReply
 }

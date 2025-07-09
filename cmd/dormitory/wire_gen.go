@@ -24,20 +24,20 @@ import (
 
 func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
 	data_Database := data.NewDatabaseConfig(confData)
-	db, err := data.NewMySQL(data_Database)
+	client, err := data.NewEntClient(data_Database)
 	if err != nil {
 		return nil, nil, err
 	}
-	iContractRepo := data.NewContractRepo(db)
+	dataData, cleanup, err := data.NewData(client, logger)
+	if err != nil {
+		return nil, nil, err
+	}
+	iContractRepo := data.NewContractRepo(dataData)
 	iContractBiz := biz.NewContractService(iContractRepo)
 	contractService := service.NewContractService(iContractBiz)
 	grpcServer := server.NewGRPCServer(confServer, contractService, logger)
-	httpServer := server.NewHTTPServer(confServer, contractService, logger)
-	dataData, cleanup, err := data.NewData(db, logger)
-	if err != nil {
-		return nil, nil, err
-	}
-	app, err := newAppWithData(logger, grpcServer, httpServer, dataData)
+	//httpServer := server.NewHTTPServer(confServer, contractService, logger)
+	app, err := newApp(logger, grpcServer, dataData)
 	if err != nil {
 		cleanup()
 		return nil, nil, err

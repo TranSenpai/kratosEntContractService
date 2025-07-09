@@ -13,7 +13,7 @@ type RequestTime struct {
 }
 
 type ContractFilter struct {
-	Id          SearchFilter[uint64]
+	Id          SearchFilter[int]
 	StudentCode SearchFilter[string]
 	FirstName   SearchFilter[string]
 	LastName    SearchFilter[string]

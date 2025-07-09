@@ -5,7 +5,7 @@ import (
 )
 
 type UpdateContract struct {
-	ID                   *uint64
+	ID                   *int
 	StudentCode          *string
 	FirstName            *string
 	LastName             *string

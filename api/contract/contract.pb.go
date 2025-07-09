@@ -26,22 +26,22 @@ const (
 
 type Contract struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Id                   *uint64                `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	StudentCode          *string                `protobuf:"bytes,2,opt,name=student_code,json=studentCode,proto3,oneof" json:"student_code,omitempty"`
-	FirstName            *string                `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
-	LastName             *string                `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
-	MiddleName           *string                `protobuf:"bytes,5,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
-	Email                *string                `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Phone                *string                `protobuf:"bytes,7,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
-	Gender               *uint32                `protobuf:"varint,8,opt,name=gender,proto3,oneof" json:"gender,omitempty"`
-	Dob                  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=dob,proto3,oneof" json:"dob,omitempty"`
-	Address              *string                `protobuf:"bytes,10,opt,name=address,proto3,oneof" json:"address,omitempty"`
-	Avatar               *string                `protobuf:"bytes,11,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
-	RoomId               *string                `protobuf:"bytes,12,opt,name=room_id,json=roomId,proto3,oneof" json:"room_id,omitempty"`
-	IsActive             *bool                  `protobuf:"varint,13,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
-	Sign                 *string                `protobuf:"bytes,14,opt,name=sign,proto3,oneof" json:"sign,omitempty"`
-	RegistryAt           *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=registry_at,json=registryAt,proto3,oneof" json:"registry_at,omitempty"`
-	NotificationChannels *uint32                `protobuf:"varint,16,opt,name=notification_channels,json=notificationChannels,proto3,oneof" json:"notification_channels,omitempty"`
+	Id                   int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	StudentCode          string                 `protobuf:"bytes,2,opt,name=student_code,json=studentCode,proto3" json:"student_code,omitempty"`
+	FirstName            string                 `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName             string                 `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	MiddleName           string                 `protobuf:"bytes,5,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
+	Email                string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Phone                string                 `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`
+	Gender               uint32                 `protobuf:"varint,8,opt,name=gender,proto3" json:"gender,omitempty"`
+	Dob                  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=dob,proto3" json:"dob,omitempty"`
+	Address              string                 `protobuf:"bytes,10,opt,name=address,proto3" json:"address,omitempty"`
+	Avatar               string                 `protobuf:"bytes,11,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	RoomId               string                 `protobuf:"bytes,12,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	IsActive             bool                   `protobuf:"varint,13,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Sign                 string                 `protobuf:"bytes,14,opt,name=sign,proto3" json:"sign,omitempty"`
+	RegistryAt           *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=registry_at,json=registryAt,proto3" json:"registry_at,omitempty"`
+	NotificationChannels uint32                 `protobuf:"varint,16,opt,name=notification_channels,json=notificationChannels,proto3" json:"notification_channels,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -76,58 +76,58 @@ func (*Contract) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Contract) GetId() uint64 {
-	if x != nil && x.Id != nil {
-		return *x.Id
+func (x *Contract) GetId() int32 {
+	if x != nil {
+		return x.Id
 	}
 	return 0
 }
 
 func (x *Contract) GetStudentCode() string {
-	if x != nil && x.StudentCode != nil {
-		return *x.StudentCode
+	if x != nil {
+		return x.StudentCode
 	}
 	return ""
 }
 
 func (x *Contract) GetFirstName() string {
-	if x != nil && x.FirstName != nil {
-		return *x.FirstName
+	if x != nil {
+		return x.FirstName
 	}
 	return ""
 }
 
 func (x *Contract) GetLastName() string {
-	if x != nil && x.LastName != nil {
-		return *x.LastName
+	if x != nil {
+		return x.LastName
 	}
 	return ""
 }
 
 func (x *Contract) GetMiddleName() string {
-	if x != nil && x.MiddleName != nil {
-		return *x.MiddleName
+	if x != nil {
+		return x.MiddleName
 	}
 	return ""
 }
 
 func (x *Contract) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
 func (x *Contract) GetPhone() string {
-	if x != nil && x.Phone != nil {
-		return *x.Phone
+	if x != nil {
+		return x.Phone
 	}
 	return ""
 }
 
 func (x *Contract) GetGender() uint32 {
-	if x != nil && x.Gender != nil {
-		return *x.Gender
+	if x != nil {
+		return x.Gender
 	}
 	return 0
 }
@@ -140,36 +140,36 @@ func (x *Contract) GetDob() *timestamppb.Timestamp {
 }
 
 func (x *Contract) GetAddress() string {
-	if x != nil && x.Address != nil {
-		return *x.Address
+	if x != nil {
+		return x.Address
 	}
 	return ""
 }
 
 func (x *Contract) GetAvatar() string {
-	if x != nil && x.Avatar != nil {
-		return *x.Avatar
+	if x != nil {
+		return x.Avatar
 	}
 	return ""
 }
 
 func (x *Contract) GetRoomId() string {
-	if x != nil && x.RoomId != nil {
-		return *x.RoomId
+	if x != nil {
+		return x.RoomId
 	}
 	return ""
 }
 
 func (x *Contract) GetIsActive() bool {
-	if x != nil && x.IsActive != nil {
-		return *x.IsActive
+	if x != nil {
+		return x.IsActive
 	}
 	return false
 }
 
 func (x *Contract) GetSign() string {
-	if x != nil && x.Sign != nil {
-		return *x.Sign
+	if x != nil {
+		return x.Sign
 	}
 	return ""
 }
@@ -182,8 +182,8 @@ func (x *Contract) GetRegistryAt() *timestamppb.Timestamp {
 }
 
 func (x *Contract) GetNotificationChannels() uint32 {
-	if x != nil && x.NotificationChannels != nil {
-		return *x.NotificationChannels
+	if x != nil {
+		return x.NotificationChannels
 	}
 	return 0
 }
@@ -382,7 +382,7 @@ func (x *CreateContractReply) GetMessage() string {
 
 type UpdateContractRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Id                   uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id                   int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	StudentCode          *string                `protobuf:"bytes,2,opt,name=student_code,json=studentCode,proto3,oneof" json:"student_code,omitempty"`
 	FirstName            *string                `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
 	LastName             *string                `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
@@ -390,7 +390,7 @@ type UpdateContractRequest struct {
 	Email                *string                `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	Phone                *string                `protobuf:"bytes,7,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	Gender               *uint32                `protobuf:"varint,8,opt,name=gender,proto3,oneof" json:"gender,omitempty"`
-	Dob                  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=dob,proto3,oneof" json:"dob,omitempty"`
+	Dob                  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=dob,proto3" json:"dob,omitempty"`
 	Address              *string                `protobuf:"bytes,10,opt,name=address,proto3,oneof" json:"address,omitempty"`
 	Avatar               *string                `protobuf:"bytes,11,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
 	RoomId               *string                `protobuf:"bytes,12,opt,name=room_id,json=roomId,proto3,oneof" json:"room_id,omitempty"`
@@ -431,7 +431,7 @@ func (*UpdateContractRequest) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateContractRequest) GetId() uint64 {
+func (x *UpdateContractRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
@@ -582,7 +582,7 @@ func (x *UpdateContractReply) GetMessage() string {
 
 type DeleteContractRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -617,7 +617,7 @@ func (*DeleteContractRequest) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DeleteContractRequest) GetId() uint64 {
+func (x *DeleteContractRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
@@ -670,7 +670,7 @@ func (x *DeleteContractReply) GetMessage() string {
 
 type GetContractRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -705,7 +705,7 @@ func (*GetContractRequest) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetContractRequest) GetId() uint64 {
+func (x *GetContractRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
@@ -868,28 +868,28 @@ func (x *IncludeExcludeUint32) GetExcludes() []uint32 {
 	return nil
 }
 
-type IncludeExcludeUint64 struct {
+type IncludeExcludeInt32 struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Includes      []uint64               `protobuf:"varint,1,rep,packed,name=includes,proto3" json:"includes,omitempty"`
-	Excludes      []uint64               `protobuf:"varint,2,rep,packed,name=excludes,proto3" json:"excludes,omitempty"`
+	Includes      []int32                `protobuf:"varint,1,rep,packed,name=includes,proto3" json:"includes,omitempty"`
+	Excludes      []int32                `protobuf:"varint,2,rep,packed,name=excludes,proto3" json:"excludes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IncludeExcludeUint64) Reset() {
-	*x = IncludeExcludeUint64{}
+func (x *IncludeExcludeInt32) Reset() {
+	*x = IncludeExcludeInt32{}
 	mi := &file_contract_contract_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IncludeExcludeUint64) String() string {
+func (x *IncludeExcludeInt32) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IncludeExcludeUint64) ProtoMessage() {}
+func (*IncludeExcludeInt32) ProtoMessage() {}
 
-func (x *IncludeExcludeUint64) ProtoReflect() protoreflect.Message {
+func (x *IncludeExcludeInt32) ProtoReflect() protoreflect.Message {
 	mi := &file_contract_contract_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -901,19 +901,19 @@ func (x *IncludeExcludeUint64) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IncludeExcludeUint64.ProtoReflect.Descriptor instead.
-func (*IncludeExcludeUint64) Descriptor() ([]byte, []int) {
+// Deprecated: Use IncludeExcludeInt32.ProtoReflect.Descriptor instead.
+func (*IncludeExcludeInt32) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *IncludeExcludeUint64) GetIncludes() []uint64 {
+func (x *IncludeExcludeInt32) GetIncludes() []int32 {
 	if x != nil {
 		return x.Includes
 	}
 	return nil
 }
 
-func (x *IncludeExcludeUint64) GetExcludes() []uint64 {
+func (x *IncludeExcludeInt32) GetExcludes() []int32 {
 	if x != nil {
 		return x.Excludes
 	}
@@ -974,7 +974,7 @@ func (x *RequestTime) GetToTime() *timestamppb.Timestamp {
 
 type ListContractRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *IncludeExcludeUint64  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            *IncludeExcludeInt32   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	StudentCode   *IncludeExcludeString  `protobuf:"bytes,2,opt,name=student_code,json=studentCode,proto3" json:"student_code,omitempty"`
 	FirstName     *IncludeExcludeString  `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName      *IncludeExcludeString  `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
@@ -1022,7 +1022,7 @@ func (*ListContractRequest) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *ListContractRequest) GetId() *IncludeExcludeUint64 {
+func (x *ListContractRequest) GetId() *IncludeExcludeInt32 {
 	if x != nil {
 		return x.Id
 	}
@@ -1174,7 +1174,7 @@ func (x *ListContractReply) GetMessage() string {
 
 type SignRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Sign          string                 `protobuf:"bytes,2,opt,name=sign,proto3" json:"sign,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1210,7 +1210,7 @@ func (*SignRequest) Descriptor() ([]byte, []int) {
 	return file_contract_contract_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *SignRequest) GetId() uint64 {
+func (x *SignRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
@@ -1420,64 +1420,37 @@ var File_contract_contract_proto protoreflect.FileDescriptor
 
 const file_contract_contract_proto_rawDesc = "" +
 	"\n" +
-	"\x17contract/contract.proto\x12\x0fapi.v1.contract\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa7\a\n" +
-	"\bContract\x12\x1c\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x042\x02(\x01H\x00R\x02id\x88\x01\x01\x120\n" +
+	"\x17contract/contract.proto\x12\fapi.contract\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8a\x05\n" +
+	"\bContract\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02(\x01R\x02id\x12+\n" +
 	"\fstudent_code\x18\x02 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
-	"H\x01R\vstudentCode\x88\x01\x01\x125\n" +
+	"R\vstudentCode\x121\n" +
 	"\n" +
-	"first_name\x18\x03 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x02R\tfirstName\x88\x01\x01\x123\n" +
-	"\tlast_name\x18\x04 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x03R\blastName\x88\x01\x01\x127\n" +
-	"\vmiddle_name\x18\x05 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x04R\n" +
-	"middleName\x88\x01\x01\x12\"\n" +
-	"\x05email\x18\x06 \x01(\tB\a\xfaB\x04r\x02`\x01H\x05R\x05email\x88\x01\x01\x12#\n" +
+	"first_name\x18\x03 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\tfirstName\x12/\n" +
+	"\tlast_name\x18\x04 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\blastName\x123\n" +
+	"\vmiddle_name\x18\x05 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\n" +
+	"middleName\x12\x1d\n" +
+	"\x05email\x18\x06 \x01(\tB\a\xfaB\x04r\x02`\x01R\x05email\x12\x1e\n" +
 	"\x05phone\x18\a \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
-	"H\x06R\x05phone\x88\x01\x01\x12$\n" +
-	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00H\aR\x06gender\x88\x01\x01\x121\n" +
-	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\bR\x03dob\x88\x01\x01\x12\x1d\n" +
+	"R\x05phone\x12\x1f\n" +
+	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00R\x06gender\x12,\n" +
+	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x18\n" +
 	"\aaddress\x18\n" +
-	" \x01(\tH\tR\aaddress\x88\x01\x01\x12\x1b\n" +
-	"\x06avatar\x18\v \x01(\tH\n" +
-	"R\x06avatar\x88\x01\x01\x128\n" +
-	"\aroom_id\x18\f \x01(\tB\x1a\xfaB\x17r\x152\x13^([A-Z])([0-9]{4}$)H\vR\x06roomId\x88\x01\x01\x12 \n" +
-	"\tis_active\x18\r \x01(\bH\fR\bisActive\x88\x01\x01\x12\x17\n" +
-	"\x04sign\x18\x0e \x01(\tH\rR\x04sign\x88\x01\x01\x12@\n" +
-	"\vregistry_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampH\x0eR\n" +
-	"registryAt\x88\x01\x01\x12A\n" +
-	"\x15notification_channels\x18\x10 \x01(\rB\a\xfaB\x04*\x02(\x00H\x0fR\x14notificationChannels\x88\x01\x01B\x05\n" +
-	"\x03_idB\x0f\n" +
-	"\r_student_codeB\r\n" +
-	"\v_first_nameB\f\n" +
-	"\n" +
-	"_last_nameB\x0e\n" +
-	"\f_middle_nameB\b\n" +
-	"\x06_emailB\b\n" +
-	"\x06_phoneB\t\n" +
-	"\a_genderB\x06\n" +
-	"\x04_dobB\n" +
-	"\n" +
-	"\b_addressB\t\n" +
-	"\a_avatarB\n" +
-	"\n" +
-	"\b_room_idB\f\n" +
-	"\n" +
-	"_is_activeB\a\n" +
-	"\x05_signB\x0e\n" +
-	"\f_registry_atB\x18\n" +
-	"\x16_notification_channels\"\xbe\x04\n" +
+	" \x01(\tR\aaddress\x12\x16\n" +
+	"\x06avatar\x18\v \x01(\tR\x06avatar\x123\n" +
+	"\aroom_id\x18\f \x01(\tB\x1a\xfaB\x17r\x152\x13^([A-Z])([0-9]{4}$)R\x06roomId\x12\x1b\n" +
+	"\tis_active\x18\r \x01(\bR\bisActive\x12\x12\n" +
+	"\x04sign\x18\x0e \x01(\tR\x04sign\x12;\n" +
+	"\vregistry_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"registryAt\x12<\n" +
+	"\x15notification_channels\x18\x10 \x01(\rB\a\xfaB\x04*\x02(\x00R\x14notificationChannels\"\xc1\x04\n" +
 	"\x15CreateContractRequest\x12+\n" +
 	"\fstudent_code\x18\x01 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
-	"R\vstudentCode\x120\n" +
+	"R\vstudentCode\x121\n" +
 	"\n" +
-	"first_name\x18\x02 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$R\tfirstName\x12.\n" +
-	"\tlast_name\x18\x03 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$R\blastName\x122\n" +
-	"\vmiddle_name\x18\x04 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$R\n" +
+	"first_name\x18\x02 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\tfirstName\x12/\n" +
+	"\tlast_name\x18\x03 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\blastName\x123\n" +
+	"\vmiddle_name\x18\x04 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$R\n" +
 	"middleName\x12\x1d\n" +
 	"\x05email\x18\x05 \x01(\tB\a\xfaB\x04r\x02`\x01R\x05email\x12\x1e\n" +
 	"\x05phone\x18\x06 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
@@ -1492,32 +1465,29 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x04sign\x18\r \x01(\tR\x04sign\x12<\n" +
 	"\x15notification_channels\x18\x0e \x01(\rB\a\xfaB\x04*\x02(\x00R\x14notificationChannels\"/\n" +
 	"\x13CreateContractReply\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xd6\x06\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xcc\x06\n" +
 	"\x15UpdateContractRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x042\x02(\x01R\x02id\x120\n" +
+	"\x02id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02(\x01R\x02id\x120\n" +
 	"\fstudent_code\x18\x02 \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
-	"H\x00R\vstudentCode\x88\x01\x01\x125\n" +
+	"H\x00R\vstudentCode\x88\x01\x01\x126\n" +
 	"\n" +
-	"first_name\x18\x03 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x01R\tfirstName\x88\x01\x01\x123\n" +
-	"\tlast_name\x18\x04 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x02R\blastName\x88\x01\x01\x127\n" +
-	"\vmiddle_name\x18\x05 \x01(\tB\x11\xfaB\x0er\f2\n" +
-	"^[A-Za-z]$H\x03R\n" +
+	"first_name\x18\x03 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$H\x01R\tfirstName\x88\x01\x01\x124\n" +
+	"\tlast_name\x18\x04 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$H\x02R\blastName\x88\x01\x01\x128\n" +
+	"\vmiddle_name\x18\x05 \x01(\tB\x12\xfaB\x0fr\r2\v^[A-Za-z]+$H\x03R\n" +
 	"middleName\x88\x01\x01\x12\"\n" +
 	"\x05email\x18\x06 \x01(\tB\a\xfaB\x04r\x02`\x01H\x04R\x05email\x88\x01\x01\x12#\n" +
 	"\x05phone\x18\a \x01(\tB\b\xfaB\x05r\x03\x98\x01\n" +
 	"H\x05R\x05phone\x88\x01\x01\x12$\n" +
-	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00H\x06R\x06gender\x88\x01\x01\x121\n" +
-	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\aR\x03dob\x88\x01\x01\x12\x1d\n" +
+	"\x06gender\x18\b \x01(\rB\a\xfaB\x04*\x02(\x00H\x06R\x06gender\x88\x01\x01\x12,\n" +
+	"\x03dob\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x1d\n" +
 	"\aaddress\x18\n" +
-	" \x01(\tH\bR\aaddress\x88\x01\x01\x12\x1b\n" +
-	"\x06avatar\x18\v \x01(\tH\tR\x06avatar\x88\x01\x01\x128\n" +
-	"\aroom_id\x18\f \x01(\tB\x1a\xfaB\x17r\x152\x13^([A-Z])([0-9]{4}$)H\n" +
-	"R\x06roomId\x88\x01\x01\x12 \n" +
-	"\tis_active\x18\r \x01(\bH\vR\bisActive\x88\x01\x01\x12\x17\n" +
-	"\x04sign\x18\x0e \x01(\tH\fR\x04sign\x88\x01\x01\x12A\n" +
-	"\x15notification_channels\x18\x0f \x01(\rB\a\xfaB\x04*\x02(\x00H\rR\x14notificationChannels\x88\x01\x01B\x0f\n" +
+	" \x01(\tH\aR\aaddress\x88\x01\x01\x12\x1b\n" +
+	"\x06avatar\x18\v \x01(\tH\bR\x06avatar\x88\x01\x01\x128\n" +
+	"\aroom_id\x18\f \x01(\tB\x1a\xfaB\x17r\x152\x13^([A-Z])([0-9]{4}$)H\tR\x06roomId\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\r \x01(\bH\n" +
+	"R\bisActive\x88\x01\x01\x12\x17\n" +
+	"\x04sign\x18\x0e \x01(\tH\vR\x04sign\x88\x01\x01\x12A\n" +
+	"\x15notification_channels\x18\x0f \x01(\rB\a\xfaB\x04*\x02(\x00H\fR\x14notificationChannels\x88\x01\x01B\x0f\n" +
 	"\r_student_codeB\r\n" +
 	"\v_first_nameB\f\n" +
 	"\n" +
@@ -1525,8 +1495,7 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\f_middle_nameB\b\n" +
 	"\x06_emailB\b\n" +
 	"\x06_phoneB\t\n" +
-	"\a_genderB\x06\n" +
-	"\x04_dobB\n" +
+	"\a_genderB\n" +
 	"\n" +
 	"\b_addressB\t\n" +
 	"\a_avatarB\n" +
@@ -1539,71 +1508,71 @@ const file_contract_contract_proto_rawDesc = "" +
 	"\x13UpdateContractReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"0\n" +
 	"\x15DeleteContractRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x04\"\x02(\x01R\x02id\"/\n" +
+	"\x02id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02(\x01R\x02id\"/\n" +
 	"\x13DeleteContractReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"-\n" +
 	"\x12GetContractRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x04\"\x02(\x01R\x02id\"c\n" +
-	"\x10GetContractReply\x125\n" +
-	"\bcontract\x18\x01 \x01(\v2\x19.api.v1.contract.ContractR\bcontract\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02(\x01R\x02id\"`\n" +
+	"\x10GetContractReply\x122\n" +
+	"\bcontract\x18\x01 \x01(\v2\x16.api.contract.ContractR\bcontract\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"b\n" +
 	"\x14IncludeExcludeString\x12$\n" +
 	"\bincludes\x18\x01 \x03(\tB\b\xfaB\x05\x92\x01\x02\x18\x01R\bincludes\x12$\n" +
 	"\bexcludes\x18\x02 \x03(\tB\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"b\n" +
 	"\x14IncludeExcludeUint32\x12$\n" +
 	"\bincludes\x18\x01 \x03(\rB\b\xfaB\x05\x92\x01\x02\x18\x01R\bincludes\x12$\n" +
-	"\bexcludes\x18\x02 \x03(\rB\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"b\n" +
-	"\x14IncludeExcludeUint64\x12$\n" +
-	"\bincludes\x18\x01 \x03(\x04B\b\xfaB\x05\x92\x01\x02\x18\x01R\bincludes\x12$\n" +
-	"\bexcludes\x18\x02 \x03(\x04B\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"\x8f\x01\n" +
-	"\vRequestTime\x12A\n" +
-	"\tfrom_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\b\xfaB\x05\x92\x01\x02\x18\x01R\bfromTime\x12=\n" +
-	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\b\xfaB\x05\x92\x01\x02\x18\x01R\x06toTime\"\xe2\x06\n" +
-	"\x13ListContractRequest\x125\n" +
-	"\x02id\x18\x01 \x01(\v2%.api.v1.contract.IncludeExcludeUint64R\x02id\x12H\n" +
-	"\fstudent_code\x18\x02 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\vstudentCode\x12D\n" +
+	"\bexcludes\x18\x02 \x03(\rB\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"a\n" +
+	"\x13IncludeExcludeInt32\x12$\n" +
+	"\bincludes\x18\x01 \x03(\x05B\b\xfaB\x05\x92\x01\x02\x18\x01R\bincludes\x12$\n" +
+	"\bexcludes\x18\x02 \x03(\x05B\b\xfaB\x05\x92\x01\x02\x18\x01R\bexcludes\"{\n" +
+	"\vRequestTime\x127\n" +
+	"\tfrom_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
+	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\"\xbd\x06\n" +
+	"\x13ListContractRequest\x121\n" +
+	"\x02id\x18\x01 \x01(\v2!.api.contract.IncludeExcludeInt32R\x02id\x12E\n" +
+	"\fstudent_code\x18\x02 \x01(\v2\".api.contract.IncludeExcludeStringR\vstudentCode\x12A\n" +
 	"\n" +
-	"first_name\x18\x03 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\tfirstName\x12B\n" +
-	"\tlast_name\x18\x04 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\blastName\x12F\n" +
-	"\vmiddle_name\x18\x05 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\n" +
-	"middleName\x12;\n" +
-	"\x05email\x18\x06 \x01(\v2%.api.v1.contract.IncludeExcludeStringR\x05email\x12;\n" +
-	"\x05phone\x18\a \x01(\v2%.api.v1.contract.IncludeExcludeStringR\x05phone\x12=\n" +
-	"\x06gender\x18\b \x01(\v2%.api.v1.contract.IncludeExcludeUint32R\x06gender\x12?\n" +
-	"\aaddress\x18\t \x01(\v2%.api.v1.contract.IncludeExcludeStringR\aaddress\x12>\n" +
+	"first_name\x18\x03 \x01(\v2\".api.contract.IncludeExcludeStringR\tfirstName\x12?\n" +
+	"\tlast_name\x18\x04 \x01(\v2\".api.contract.IncludeExcludeStringR\blastName\x12C\n" +
+	"\vmiddle_name\x18\x05 \x01(\v2\".api.contract.IncludeExcludeStringR\n" +
+	"middleName\x128\n" +
+	"\x05email\x18\x06 \x01(\v2\".api.contract.IncludeExcludeStringR\x05email\x128\n" +
+	"\x05phone\x18\a \x01(\v2\".api.contract.IncludeExcludeStringR\x05phone\x12:\n" +
+	"\x06gender\x18\b \x01(\v2\".api.contract.IncludeExcludeUint32R\x06gender\x12<\n" +
+	"\aaddress\x18\t \x01(\v2\".api.contract.IncludeExcludeStringR\aaddress\x12;\n" +
 	"\aroom_id\x18\n" +
-	" \x01(\v2%.api.v1.contract.IncludeExcludeStringR\x06roomId\x12 \n" +
-	"\tis_active\x18\v \x01(\bH\x00R\bisActive\x88\x01\x01\x129\n" +
-	"\x04sign\x18\f \x01(\v2%.api.v1.contract.IncludeExcludeStringR\x04sign\x12=\n" +
-	"\vregistry_at\x18\r \x01(\v2\x1c.api.v1.contract.RequestTimeR\n" +
+	" \x01(\v2\".api.contract.IncludeExcludeStringR\x06roomId\x12 \n" +
+	"\tis_active\x18\v \x01(\bH\x00R\bisActive\x88\x01\x01\x126\n" +
+	"\x04sign\x18\f \x01(\v2\".api.contract.IncludeExcludeStringR\x04sign\x12:\n" +
+	"\vregistry_at\x18\r \x01(\v2\x19.api.contract.RequestTimeR\n" +
 	"registryAt\x12\x14\n" +
 	"\x05total\x18\x0e \x01(\rR\x05totalB\f\n" +
 	"\n" +
-	"_is_active\"d\n" +
-	"\x11ListContractReply\x125\n" +
-	"\bcontract\x18\x01 \x03(\v2\x19.api.v1.contract.ContractR\bcontract\x12\x18\n" +
+	"_is_active\"a\n" +
+	"\x11ListContractReply\x122\n" +
+	"\bcontract\x18\x01 \x03(\v2\x16.api.contract.ContractR\bcontract\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\":\n" +
 	"\vSignRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xfaB\x042\x02(\x01R\x02id\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02(\x01R\x02id\x12\x12\n" +
 	"\x04sign\x18\x02 \x01(\tR\x04sign\"%\n" +
 	"\tSignReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\":\n" +
 	" ListTotalContractEachRoomRequest\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\rR\x06number\"\xeb\x01\n" +
-	"\x1eListTotalContractEachRoomReply\x12l\n" +
-	"\x10contractEachRoom\x18\x01 \x03(\v2@.api.v1.contract.ListTotalContractEachRoomReply.ContractEachRoomR\x10contractEachRoom\x12\x18\n" +
+	"\x06number\x18\x01 \x01(\rR\x06number\"\xe8\x01\n" +
+	"\x1eListTotalContractEachRoomReply\x12i\n" +
+	"\x10contractEachRoom\x18\x01 \x03(\v2=.api.contract.ListTotalContractEachRoomReply.ContractEachRoomR\x10contractEachRoom\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x1aA\n" +
 	"\x10ContractEachRoom\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\rR\x05total2\x95\a\n" +
-	"\x0fContractService\x12|\n" +
-	"\x0eCreateContract\x12&.api.v1.contract.CreateContractRequest\x1a$.api.v1.contract.CreateContractReply\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/v1/contracts\x12\x81\x01\n" +
-	"\x0eUpdateContract\x12&.api.v1.contract.UpdateContractRequest\x1a$.api.v1.contract.UpdateContractReply\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/api/v1/contracts/{id}\x12p\n" +
-	"\fSignContract\x12\x1c.api.v1.contract.SignRequest\x1a\x1a.api.v1.contract.SignReply\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/api/v1/contracts/{id}/sign\x12y\n" +
-	"\x0eDeleteContract\x12&.api.v1.contract.DeleteContractRequest\x1a$.api.v1.contract.DeleteContractReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/contracts\x12p\n" +
-	"\vGetContract\x12#.api.v1.contract.GetContractRequest\x1a!.api.v1.contract.GetContractReply\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/api/v1/contracts\x12x\n" +
-	"\fListContract\x12$.api.v1.contract.ListContractRequest\x1a\".api.v1.contract.ListContractReply\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/v1/contracts/list\x12\xa6\x01\n" +
-	"\x19ListTotalContractEachRoom\x121.api.v1.contract.ListTotalContractEachRoomRequest\x1a/.api.v1.contract.ListTotalContractEachRoomReply\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/contracts/rooms/leastB!Z\x1fdormitory/api/contract;contractb\x06proto3"
+	"\x05total\x18\x02 \x01(\rR\x05total2\x83\x05\n" +
+	"\x0fContractService\x12X\n" +
+	"\x0eCreateContract\x12#.api.contract.CreateContractRequest\x1a!.api.contract.CreateContractReply\x12X\n" +
+	"\x0eUpdateContract\x12#.api.contract.UpdateContractRequest\x1a!.api.contract.UpdateContractReply\x12B\n" +
+	"\fSignContract\x12\x19.api.contract.SignRequest\x1a\x17.api.contract.SignReply\x12X\n" +
+	"\x0eDeleteContract\x12#.api.contract.DeleteContractRequest\x1a!.api.contract.DeleteContractReply\x12O\n" +
+	"\vGetContract\x12 .api.contract.GetContractRequest\x1a\x1e.api.contract.GetContractReply\x12R\n" +
+	"\fListContract\x12!.api.contract.ListContractRequest\x1a\x1f.api.contract.ListContractReply\x12y\n" +
+	"\x19ListTotalContractEachRoom\x12..api.contract.ListTotalContractEachRoomRequest\x1a,.api.contract.ListTotalContractEachRoomReplyB\x17Z\x15/contractApi;contractb\x06proto3"
 
 var (
 	file_contract_contract_proto_rawDescOnce sync.Once
@@ -1619,64 +1588,64 @@ func file_contract_contract_proto_rawDescGZIP() []byte {
 
 var file_contract_contract_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_contract_contract_proto_goTypes = []any{
-	(*Contract)(nil),                                        // 0: api.v1.contract.Contract
-	(*CreateContractRequest)(nil),                           // 1: api.v1.contract.CreateContractRequest
-	(*CreateContractReply)(nil),                             // 2: api.v1.contract.CreateContractReply
-	(*UpdateContractRequest)(nil),                           // 3: api.v1.contract.UpdateContractRequest
-	(*UpdateContractReply)(nil),                             // 4: api.v1.contract.UpdateContractReply
-	(*DeleteContractRequest)(nil),                           // 5: api.v1.contract.DeleteContractRequest
-	(*DeleteContractReply)(nil),                             // 6: api.v1.contract.DeleteContractReply
-	(*GetContractRequest)(nil),                              // 7: api.v1.contract.GetContractRequest
-	(*GetContractReply)(nil),                                // 8: api.v1.contract.GetContractReply
-	(*IncludeExcludeString)(nil),                            // 9: api.v1.contract.IncludeExcludeString
-	(*IncludeExcludeUint32)(nil),                            // 10: api.v1.contract.IncludeExcludeUint32
-	(*IncludeExcludeUint64)(nil),                            // 11: api.v1.contract.IncludeExcludeUint64
-	(*RequestTime)(nil),                                     // 12: api.v1.contract.RequestTime
-	(*ListContractRequest)(nil),                             // 13: api.v1.contract.ListContractRequest
-	(*ListContractReply)(nil),                               // 14: api.v1.contract.ListContractReply
-	(*SignRequest)(nil),                                     // 15: api.v1.contract.SignRequest
-	(*SignReply)(nil),                                       // 16: api.v1.contract.SignReply
-	(*ListTotalContractEachRoomRequest)(nil),                // 17: api.v1.contract.ListTotalContractEachRoomRequest
-	(*ListTotalContractEachRoomReply)(nil),                  // 18: api.v1.contract.ListTotalContractEachRoomReply
-	(*ListTotalContractEachRoomReply_ContractEachRoom)(nil), // 19: api.v1.contract.ListTotalContractEachRoomReply.ContractEachRoom
+	(*Contract)(nil),                                        // 0: api.contract.Contract
+	(*CreateContractRequest)(nil),                           // 1: api.contract.CreateContractRequest
+	(*CreateContractReply)(nil),                             // 2: api.contract.CreateContractReply
+	(*UpdateContractRequest)(nil),                           // 3: api.contract.UpdateContractRequest
+	(*UpdateContractReply)(nil),                             // 4: api.contract.UpdateContractReply
+	(*DeleteContractRequest)(nil),                           // 5: api.contract.DeleteContractRequest
+	(*DeleteContractReply)(nil),                             // 6: api.contract.DeleteContractReply
+	(*GetContractRequest)(nil),                              // 7: api.contract.GetContractRequest
+	(*GetContractReply)(nil),                                // 8: api.contract.GetContractReply
+	(*IncludeExcludeString)(nil),                            // 9: api.contract.IncludeExcludeString
+	(*IncludeExcludeUint32)(nil),                            // 10: api.contract.IncludeExcludeUint32
+	(*IncludeExcludeInt32)(nil),                             // 11: api.contract.IncludeExcludeInt32
+	(*RequestTime)(nil),                                     // 12: api.contract.RequestTime
+	(*ListContractRequest)(nil),                             // 13: api.contract.ListContractRequest
+	(*ListContractReply)(nil),                               // 14: api.contract.ListContractReply
+	(*SignRequest)(nil),                                     // 15: api.contract.SignRequest
+	(*SignReply)(nil),                                       // 16: api.contract.SignReply
+	(*ListTotalContractEachRoomRequest)(nil),                // 17: api.contract.ListTotalContractEachRoomRequest
+	(*ListTotalContractEachRoomReply)(nil),                  // 18: api.contract.ListTotalContractEachRoomReply
+	(*ListTotalContractEachRoomReply_ContractEachRoom)(nil), // 19: api.contract.ListTotalContractEachRoomReply.ContractEachRoom
 	(*timestamppb.Timestamp)(nil),                           // 20: google.protobuf.Timestamp
 }
 var file_contract_contract_proto_depIdxs = []int32{
-	20, // 0: api.v1.contract.Contract.dob:type_name -> google.protobuf.Timestamp
-	20, // 1: api.v1.contract.Contract.registry_at:type_name -> google.protobuf.Timestamp
-	20, // 2: api.v1.contract.CreateContractRequest.dob:type_name -> google.protobuf.Timestamp
-	20, // 3: api.v1.contract.UpdateContractRequest.dob:type_name -> google.protobuf.Timestamp
-	0,  // 4: api.v1.contract.GetContractReply.contract:type_name -> api.v1.contract.Contract
-	20, // 5: api.v1.contract.RequestTime.from_time:type_name -> google.protobuf.Timestamp
-	20, // 6: api.v1.contract.RequestTime.to_time:type_name -> google.protobuf.Timestamp
-	11, // 7: api.v1.contract.ListContractRequest.id:type_name -> api.v1.contract.IncludeExcludeUint64
-	9,  // 8: api.v1.contract.ListContractRequest.student_code:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 9: api.v1.contract.ListContractRequest.first_name:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 10: api.v1.contract.ListContractRequest.last_name:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 11: api.v1.contract.ListContractRequest.middle_name:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 12: api.v1.contract.ListContractRequest.email:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 13: api.v1.contract.ListContractRequest.phone:type_name -> api.v1.contract.IncludeExcludeString
-	10, // 14: api.v1.contract.ListContractRequest.gender:type_name -> api.v1.contract.IncludeExcludeUint32
-	9,  // 15: api.v1.contract.ListContractRequest.address:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 16: api.v1.contract.ListContractRequest.room_id:type_name -> api.v1.contract.IncludeExcludeString
-	9,  // 17: api.v1.contract.ListContractRequest.sign:type_name -> api.v1.contract.IncludeExcludeString
-	12, // 18: api.v1.contract.ListContractRequest.registry_at:type_name -> api.v1.contract.RequestTime
-	0,  // 19: api.v1.contract.ListContractReply.contract:type_name -> api.v1.contract.Contract
-	19, // 20: api.v1.contract.ListTotalContractEachRoomReply.contractEachRoom:type_name -> api.v1.contract.ListTotalContractEachRoomReply.ContractEachRoom
-	1,  // 21: api.v1.contract.ContractService.CreateContract:input_type -> api.v1.contract.CreateContractRequest
-	3,  // 22: api.v1.contract.ContractService.UpdateContract:input_type -> api.v1.contract.UpdateContractRequest
-	15, // 23: api.v1.contract.ContractService.SignContract:input_type -> api.v1.contract.SignRequest
-	5,  // 24: api.v1.contract.ContractService.DeleteContract:input_type -> api.v1.contract.DeleteContractRequest
-	7,  // 25: api.v1.contract.ContractService.GetContract:input_type -> api.v1.contract.GetContractRequest
-	13, // 26: api.v1.contract.ContractService.ListContract:input_type -> api.v1.contract.ListContractRequest
-	17, // 27: api.v1.contract.ContractService.ListTotalContractEachRoom:input_type -> api.v1.contract.ListTotalContractEachRoomRequest
-	2,  // 28: api.v1.contract.ContractService.CreateContract:output_type -> api.v1.contract.CreateContractReply
-	4,  // 29: api.v1.contract.ContractService.UpdateContract:output_type -> api.v1.contract.UpdateContractReply
-	16, // 30: api.v1.contract.ContractService.SignContract:output_type -> api.v1.contract.SignReply
-	6,  // 31: api.v1.contract.ContractService.DeleteContract:output_type -> api.v1.contract.DeleteContractReply
-	8,  // 32: api.v1.contract.ContractService.GetContract:output_type -> api.v1.contract.GetContractReply
-	14, // 33: api.v1.contract.ContractService.ListContract:output_type -> api.v1.contract.ListContractReply
-	18, // 34: api.v1.contract.ContractService.ListTotalContractEachRoom:output_type -> api.v1.contract.ListTotalContractEachRoomReply
+	20, // 0: api.contract.Contract.dob:type_name -> google.protobuf.Timestamp
+	20, // 1: api.contract.Contract.registry_at:type_name -> google.protobuf.Timestamp
+	20, // 2: api.contract.CreateContractRequest.dob:type_name -> google.protobuf.Timestamp
+	20, // 3: api.contract.UpdateContractRequest.dob:type_name -> google.protobuf.Timestamp
+	0,  // 4: api.contract.GetContractReply.contract:type_name -> api.contract.Contract
+	20, // 5: api.contract.RequestTime.from_time:type_name -> google.protobuf.Timestamp
+	20, // 6: api.contract.RequestTime.to_time:type_name -> google.protobuf.Timestamp
+	11, // 7: api.contract.ListContractRequest.id:type_name -> api.contract.IncludeExcludeInt32
+	9,  // 8: api.contract.ListContractRequest.student_code:type_name -> api.contract.IncludeExcludeString
+	9,  // 9: api.contract.ListContractRequest.first_name:type_name -> api.contract.IncludeExcludeString
+	9,  // 10: api.contract.ListContractRequest.last_name:type_name -> api.contract.IncludeExcludeString
+	9,  // 11: api.contract.ListContractRequest.middle_name:type_name -> api.contract.IncludeExcludeString
+	9,  // 12: api.contract.ListContractRequest.email:type_name -> api.contract.IncludeExcludeString
+	9,  // 13: api.contract.ListContractRequest.phone:type_name -> api.contract.IncludeExcludeString
+	10, // 14: api.contract.ListContractRequest.gender:type_name -> api.contract.IncludeExcludeUint32
+	9,  // 15: api.contract.ListContractRequest.address:type_name -> api.contract.IncludeExcludeString
+	9,  // 16: api.contract.ListContractRequest.room_id:type_name -> api.contract.IncludeExcludeString
+	9,  // 17: api.contract.ListContractRequest.sign:type_name -> api.contract.IncludeExcludeString
+	12, // 18: api.contract.ListContractRequest.registry_at:type_name -> api.contract.RequestTime
+	0,  // 19: api.contract.ListContractReply.contract:type_name -> api.contract.Contract
+	19, // 20: api.contract.ListTotalContractEachRoomReply.contractEachRoom:type_name -> api.contract.ListTotalContractEachRoomReply.ContractEachRoom
+	1,  // 21: api.contract.ContractService.CreateContract:input_type -> api.contract.CreateContractRequest
+	3,  // 22: api.contract.ContractService.UpdateContract:input_type -> api.contract.UpdateContractRequest
+	15, // 23: api.contract.ContractService.SignContract:input_type -> api.contract.SignRequest
+	5,  // 24: api.contract.ContractService.DeleteContract:input_type -> api.contract.DeleteContractRequest
+	7,  // 25: api.contract.ContractService.GetContract:input_type -> api.contract.GetContractRequest
+	13, // 26: api.contract.ContractService.ListContract:input_type -> api.contract.ListContractRequest
+	17, // 27: api.contract.ContractService.ListTotalContractEachRoom:input_type -> api.contract.ListTotalContractEachRoomRequest
+	2,  // 28: api.contract.ContractService.CreateContract:output_type -> api.contract.CreateContractReply
+	4,  // 29: api.contract.ContractService.UpdateContract:output_type -> api.contract.UpdateContractReply
+	16, // 30: api.contract.ContractService.SignContract:output_type -> api.contract.SignReply
+	6,  // 31: api.contract.ContractService.DeleteContract:output_type -> api.contract.DeleteContractReply
+	8,  // 32: api.contract.ContractService.GetContract:output_type -> api.contract.GetContractReply
+	14, // 33: api.contract.ContractService.ListContract:output_type -> api.contract.ListContractReply
+	18, // 34: api.contract.ContractService.ListTotalContractEachRoom:output_type -> api.contract.ListTotalContractEachRoomReply
 	28, // [28:35] is the sub-list for method output_type
 	21, // [21:28] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
@@ -1689,7 +1658,6 @@ func file_contract_contract_proto_init() {
 	if File_contract_contract_proto != nil {
 		return
 	}
-	file_contract_contract_proto_msgTypes[0].OneofWrappers = []any{}
 	file_contract_contract_proto_msgTypes[3].OneofWrappers = []any{}
 	file_contract_contract_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}

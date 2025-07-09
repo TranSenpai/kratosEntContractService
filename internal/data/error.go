@@ -1,39 +1,34 @@
 package data
 
 import (
-	"net/http"
-
+	"database/sql"
+	"dormitory/internal/ent"
 	kerror "github.com/go-kratos/kratos/v2/errors"
-
-	"gorm.io/gorm"
+	"github.com/lib/pq"
+	"net/http"
 )
 
-var mapError = map[string]int{
-	gorm.ErrRecordNotFound.Error():                http.StatusNotFound,
-	gorm.ErrInvalidTransaction.Error():            http.StatusInternalServerError,
-	gorm.ErrNotImplemented.Error():                http.StatusInternalServerError,
-	gorm.ErrMissingWhereClause.Error():            http.StatusInternalServerError,
-	gorm.ErrUnsupportedRelation.Error():           http.StatusInternalServerError,
-	gorm.ErrPrimaryKeyRequired.Error():            http.StatusBadRequest,
-	gorm.ErrModelValueRequired.Error():            http.StatusBadRequest,
-	gorm.ErrModelAccessibleFieldsRequired.Error(): http.StatusBadRequest,
-	gorm.ErrSubQueryRequired.Error():              http.StatusInternalServerError,
-	gorm.ErrInvalidData.Error():                   http.StatusBadRequest,
-	gorm.ErrUnsupportedDriver.Error():             http.StatusInternalServerError,
-	gorm.ErrRegistered.Error():                    http.StatusInternalServerError,
-	gorm.ErrInvalidField.Error():                  http.StatusBadRequest,
-	gorm.ErrDryRunModeUnsupported.Error():         http.StatusInternalServerError,
-	gorm.ErrInvalidDB.Error():                     http.StatusInternalServerError,
-	gorm.ErrInvalidValue.Error():                  http.StatusBadRequest,
-	gorm.ErrPreloadNotAllowed.Error():             http.StatusInternalServerError,
-	gorm.ErrDuplicatedKey.Error():                 http.StatusBadRequest,
-	gorm.ErrForeignKeyViolated.Error():            http.StatusInternalServerError,
-}
-
 func GetError(err error) error {
-	value, exist := mapError[err.Error()]
-	if !exist {
-		value = http.StatusInternalServerError
+	if err == nil {
+		return nil
 	}
-	return kerror.New(value, "Repo error", err.Error())
+
+	if ent.IsNotFound(err) || err == sql.ErrNoRows {
+		return kerror.New(http.StatusNotFound, "Repo error", "resource not found")
+	}
+
+	if pqErr, ok := err.(*pq.Error); ok {
+		switch pqErr.Code.Name() {
+		case "unique_violation":
+			return kerror.New(http.StatusBadRequest, "Repo error", "duplicate value")
+		case "foreign_key_violation":
+			return kerror.New(http.StatusBadRequest, "Repo error", "invalid reference")
+		case "check_violation":
+			return kerror.New(http.StatusBadRequest, "Repo error", "constraint failed")
+		case "not_null_violation":
+			return kerror.New(http.StatusBadRequest, "Repo error", "missing required field")
+		}
+	}
+
+	return kerror.New(http.StatusInternalServerError, "Repo error", err.Error())
 }

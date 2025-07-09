@@ -57,6 +57,15 @@ api:
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	    	${PROTO_FILES}
 
+.PHONY: initEntGen
+initEntGen:
+	mkdir -p ./dormitory/internal/ent/schema && \
+	go run -mod=mod entgo.io/ent/cmd/ent new Contract
+
+.PHONY: genEntity
+genEntity:
+	go generate ./internal/ent
+
 .PHONY: build
 # build
 build:
@@ -110,3 +119,13 @@ help:
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
 .DEFAULT_GOAL := help
+
+.PHONY: client
+client:
+	protoc \
+	  --proto_path=./api/contract \
+	  --proto_path=./third_party \
+	  --go_out=../../gateway/gatewayServer/api \
+	  --go-grpc_out=../../gateway/gatewayServer/api \
+	  contract.proto
+

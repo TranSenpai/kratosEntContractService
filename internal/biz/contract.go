@@ -2,7 +2,7 @@ package biz
 
 import (
 	"context"
-	entity "dormitory/internal/entities"
+	entity "dormitory/internal/ent"
 	models "dormitory/internal/models"
 	"errors"
 	"net/http"
@@ -36,8 +36,8 @@ func (c *contractBiz) UpdateContract(ctx context.Context, contract *models.Updat
 	return c.contractRepo.UpdateContract(ctx, mapField, filter)
 }
 
-func (c *contractBiz) DeleteContract(ctx context.Context, contractID uint64) error {
-	contract, err := c.contractRepo.GetContract(ctx, contractID)
+func (c *contractBiz) DeleteContract(ctx context.Context, filter *models.ContractFilter) error {
+	contract, err := c.contractRepo.GetContract(ctx, filter)
 	if err != nil {
 		return err
 	}
@@ -45,11 +45,11 @@ func (c *contractBiz) DeleteContract(ctx context.Context, contractID uint64) err
 		return GetError(http.StatusBadRequest, errors.New("contract is available, terminate the contract before delete"))
 	}
 
-	return c.contractRepo.DeleteContract(ctx, contractID)
+	return c.contractRepo.DeleteContract(ctx, filter)
 }
 
-func (c *contractBiz) GetContract(ctx context.Context, contractID uint64) (*models.ReplyContract, error) {
-	contractEntity, err := c.contractRepo.GetContract(ctx, contractID)
+func (c *contractBiz) GetContract(ctx context.Context, filter *models.ContractFilter) (*models.ReplyContract, error) {
+	contractEntity, err := c.contractRepo.GetContract(ctx, filter)
 	if err != nil {
 		return nil, err
 	}
@@ -106,8 +106,8 @@ func (c *contractBiz) ValidateSignContract(ctx context.Context, contract *entity
 	return nil
 }
 
-func (c *contractBiz) SignContract(ctx context.Context, contractID uint64, signature string) error {
-	contractEntity, err := c.contractRepo.GetContract(ctx, contractID)
+func (c *contractBiz) SignContract(ctx context.Context, filter *models.ContractFilter, signature string) error {
+	contractEntity, err := c.contractRepo.GetContract(ctx, filter)
 	if err != nil {
 		return err
 	}
@@ -120,10 +120,7 @@ func (c *contractBiz) SignContract(ctx context.Context, contractID uint64, signa
 		"IsActive": true,
 		"Sign":     signature,
 	}
-
-	var filter models.ContractFilter
-	filter.Id.Includes = append(filter.Id.Includes, contractID)
-	err = c.contractRepo.UpdateContract(ctx, mapField, &filter)
+	err = c.contractRepo.UpdateContract(ctx, mapField, filter)
 	if err != nil {
 		return err
 	}
