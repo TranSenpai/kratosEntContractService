@@ -9,9 +9,9 @@ import (
 	"log"
 	"reflect"
 
-	"dormitory/internal/ent/migrate"
+	"kratosEntContractService/internal/ent/migrate"
 
-	"dormitory/internal/ent/contract"
+	"kratosEntContractService/internal/ent/contract"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"

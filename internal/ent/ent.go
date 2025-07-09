@@ -4,9 +4,9 @@ package ent
 
 import (
 	"context"
-	"dormitory/internal/ent/contract"
 	"errors"
 	"fmt"
+	"kratosEntContractService/internal/ent/contract"
 	"reflect"
 	"sync"
 

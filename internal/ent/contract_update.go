@@ -4,10 +4,10 @@ package ent
 
 import (
 	"context"
-	"dormitory/internal/ent/contract"
-	"dormitory/internal/ent/predicate"
 	"errors"
 	"fmt"
+	"kratosEntContractService/internal/ent/contract"
+	"kratosEntContractService/internal/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"

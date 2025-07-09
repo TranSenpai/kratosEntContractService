@@ -2,9 +2,9 @@ package biz
 
 import (
 	"context"
-	entity "dormitory/internal/ent"
-	models "dormitory/internal/models"
 	"errors"
+	entity "kratosEntContractService/internal/ent"
+	models "kratosEntContractService/internal/models"
 	"net/http"
 )
 

@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "kratosDormitory/dormitory/api/contract;contract";
+option go_package = "kratosDormitory/kratosEntContractService/api/contract;contract";
 
 service ContractService {
 	rpc CreateContract (CreateContractRequest) returns (CreateContractReply);

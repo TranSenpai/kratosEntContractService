@@ -3,8 +3,8 @@
 package ent
 
 import (
-	"dormitory/internal/ent/contract"
-	schema "dormitory/internal/ent/schema"
+	"kratosEntContractService/internal/ent/contract"
+	schema "kratosEntContractService/internal/ent/schema"
 	"time"
 )
 

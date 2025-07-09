@@ -7,13 +7,13 @@
 package main
 
 import (
-	"dormitory/internal/biz"
-	"dormitory/internal/conf"
-	"dormitory/internal/data"
-	"dormitory/internal/server"
-	"dormitory/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
+	"kratosEntContractService/internal/biz"
+	"kratosEntContractService/internal/conf"
+	"kratosEntContractService/internal/data"
+	"kratosEntContractService/internal/server"
+	"kratosEntContractService/internal/service"
 )
 
 import (

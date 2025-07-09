@@ -2,8 +2,8 @@ package client
 
 import (
 	"context"
-	contractApi "dormitory/api/contract"
 	"fmt"
+	contractApi "kratosEntContractService/api/contract"
 	"log"
 	"time"
 

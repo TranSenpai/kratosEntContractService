@@ -1,10 +1,10 @@
 package server
 
 import (
-	contractApi "dormitory/api/contract"
+	contractApi "kratosEntContractService/api/contract"
 
-	"dormitory/internal/conf"
-	"dormitory/internal/service"
+	"kratosEntContractService/internal/conf"
+	"kratosEntContractService/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

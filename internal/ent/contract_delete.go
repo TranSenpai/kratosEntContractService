@@ -4,8 +4,8 @@ package ent
 
 import (
 	"context"
-	"dormitory/internal/ent/contract"
-	"dormitory/internal/ent/predicate"
+	"kratosEntContractService/internal/ent/contract"
+	"kratosEntContractService/internal/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"

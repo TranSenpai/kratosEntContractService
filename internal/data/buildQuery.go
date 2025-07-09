@@ -1,9 +1,9 @@
 package data
 
 import (
-	entity "dormitory/internal/ent"
-	whereContract "dormitory/internal/ent/contract"
-	models "dormitory/internal/models"
+	entity "kratosEntContractService/internal/ent"
+	whereContract "kratosEntContractService/internal/ent/contract"
+	models "kratosEntContractService/internal/models"
 )
 
 func buildID[T any](data models.SearchFilter[T], tx *entity.ContractQuery) *entity.ContractQuery {

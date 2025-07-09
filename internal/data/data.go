@@ -1,9 +1,9 @@
 package data
 
 import (
-	"dormitory/internal/ent"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
+	"kratosEntContractService/internal/ent"
 )
 
 var ProviderSet = wire.NewSet(NewData, NewContractRepo, NewEntClient, NewDatabaseConfig)

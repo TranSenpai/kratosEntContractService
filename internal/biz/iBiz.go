@@ -2,7 +2,7 @@ package biz
 
 import (
 	"context"
-	models "dormitory/internal/models"
+	models "kratosEntContractService/internal/models"
 
 	"github.com/google/wire"
 )

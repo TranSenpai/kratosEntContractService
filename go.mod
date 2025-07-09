@@ -1,4 +1,4 @@
-module dormitory
+module kratosEntContractService
 
 go 1.23
 

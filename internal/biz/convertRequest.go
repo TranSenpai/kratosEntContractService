@@ -1,10 +1,10 @@
 package biz
 
 import (
-	entity "dormitory/internal/ent"
-	models "dormitory/internal/models"
 	"encoding/base64"
 	"errors"
+	entity "kratosEntContractService/internal/ent"
+	models "kratosEntContractService/internal/models"
 	"net/http"
 	"time"
 )

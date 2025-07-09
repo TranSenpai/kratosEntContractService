@@ -3,7 +3,7 @@
 package contract
 
 import (
-	"dormitory/internal/ent/predicate"
+	"kratosEntContractService/internal/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"

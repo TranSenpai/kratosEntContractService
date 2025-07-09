@@ -1,8 +1,8 @@
 package service
 
 import (
-	contractApi "dormitory/api/contract"
-	models "dormitory/internal/models"
+	contractApi "kratosEntContractService/api/contract"
+	models "kratosEntContractService/internal/models"
 
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )

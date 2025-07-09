@@ -2,13 +2,13 @@ package data
 
 import (
 	"context"
-	"dormitory/internal/biz"
-	entity "dormitory/internal/ent"
-	whereContract "dormitory/internal/ent/contract"
-	models "dormitory/internal/models"
 	"entgo.io/ent/dialect/sql"
 	"errors"
 	"fmt"
+	"kratosEntContractService/internal/biz"
+	entity "kratosEntContractService/internal/ent"
+	whereContract "kratosEntContractService/internal/ent/contract"
+	models "kratosEntContractService/internal/models"
 	"time"
 )
 

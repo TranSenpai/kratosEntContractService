@@ -4,9 +4,9 @@ package ent
 
 import (
 	"context"
-	"dormitory/internal/ent/contract"
-	"dormitory/internal/ent/predicate"
 	"fmt"
+	"kratosEntContractService/internal/ent/contract"
+	"kratosEntContractService/internal/ent/predicate"
 	"math"
 
 	"entgo.io/ent"

@@ -1,9 +1,9 @@
 package data
 
 import (
-	"dormitory/internal/conf"
-	ent "dormitory/internal/ent"
 	"fmt"
+	"kratosEntContractService/internal/conf"
+	ent "kratosEntContractService/internal/ent"
 )
 
 func NewDatabaseConfig(data *conf.Data) *conf.Data_Database {

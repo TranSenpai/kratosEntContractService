@@ -2,8 +2,8 @@ package biz
 
 import (
 	"context"
-	entity "dormitory/internal/ent"
-	models "dormitory/internal/models"
+	entity "kratosEntContractService/internal/ent"
+	models "kratosEntContractService/internal/models"
 )
 
 type IContractRepo interface {

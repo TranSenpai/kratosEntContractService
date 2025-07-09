@@ -4,9 +4,9 @@ package ent
 
 import (
 	"context"
-	"dormitory/internal/ent/contract"
 	"errors"
 	"fmt"
+	"kratosEntContractService/internal/ent/contract"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"

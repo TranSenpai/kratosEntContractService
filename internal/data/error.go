@@ -2,9 +2,9 @@ package data
 
 import (
 	"database/sql"
-	"dormitory/internal/ent"
 	kerror "github.com/go-kratos/kratos/v2/errors"
 	"github.com/lib/pq"
+	"kratosEntContractService/internal/ent"
 	"net/http"
 )
 

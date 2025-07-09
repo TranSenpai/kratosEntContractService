@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	contractApi "dormitory/api/contract"
-	"dormitory/internal/biz"
-	models "dormitory/internal/models"
+	contractApi "kratosEntContractService/api/contract"
+	"kratosEntContractService/internal/biz"
+	models "kratosEntContractService/internal/models"
 	"time"
 	// "github.com/go-kratos/kratos/v2/api/metadata"
 )

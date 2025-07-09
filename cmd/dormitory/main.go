@@ -1,9 +1,9 @@
 package main
 
 import (
-	"dormitory/internal/conf"
-	"dormitory/internal/data"
 	"flag"
+	"kratosEntContractService/internal/conf"
+	"kratosEntContractService/internal/data"
 	"os"
 
 	"github.com/go-kratos/kratos/v2"

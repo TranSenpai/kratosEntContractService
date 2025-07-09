@@ -3,8 +3,8 @@
 package ent
 
 import (
-	"dormitory/internal/ent/contract"
 	"fmt"
+	"kratosEntContractService/internal/ent/contract"
 	"strings"
 	"time"
 

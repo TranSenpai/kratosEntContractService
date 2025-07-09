@@ -2,9 +2,9 @@ package data
 
 import (
 	"context"
-	"dormitory/internal/ent"
 	"fmt"
 	_ "github.com/lib/pq"
+	"kratosEntContractService/internal/ent"
 )
 
 func createTableContract(client *ent.Client, ctx context.Context) error {

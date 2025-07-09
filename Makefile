@@ -59,7 +59,7 @@ api:
 
 .PHONY: initEntGen
 initEntGen:
-	mkdir -p ./dormitory/internal/ent/schema && \
+	mkdir -p ./kratosEntContractService/internal/ent/schema && \
 	go run -mod=mod entgo.io/ent/cmd/ent new Contract
 
 .PHONY: genEntity
